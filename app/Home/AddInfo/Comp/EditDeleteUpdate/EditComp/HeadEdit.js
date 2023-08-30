@@ -21,12 +21,12 @@ import {
   Radio,
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
-
+import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 export default function EditHeadQ({ item }) {
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
-
+  const { fetchData } = useGlobalContext();
   const sizes = ["xl"];
 
   const handleOpen = (size) => {
@@ -102,6 +102,7 @@ export default function EditHeadQ({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
+          fetchData();
         });
     } else {
       toast.error("Please fill All Details");
@@ -132,6 +133,7 @@ export default function EditHeadQ({ item }) {
       .finally(() => {
         setIsLoading(false);
         notifyd();
+        fetchData();
       });
   };
 

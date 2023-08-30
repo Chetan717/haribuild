@@ -2,6 +2,8 @@
 import React from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import shop from "../../../img/shop.webp";
+import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
 import {
   Modal,
@@ -13,7 +15,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
-import { CheckboxGroup } from "@nextui-org/react";
+
 import { CustomCheckbox } from "./styleComp/CustomCheckbox";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 export default function AddStockiest() {
@@ -31,10 +33,7 @@ export default function AddStockiest() {
   const [formData, setFormData] = React.useState({
     Code: "",
     Name: "",
-    contactPer: "",
     mobile: "",
-    DLNo: "",
-    GSTNo: "",
     address: "",
     Area: "",
     Active: true,
@@ -88,28 +87,31 @@ export default function AddStockiest() {
         .then((response) => {
           const responseData = response.data;
           setResponse(responseData);
-          toast.success(`${response?.data?.message}`);
+
+          if (response.status === 200) {
+            // Perform any necessary actions on success
+            notify();
+          } else {
+            setHasError(true);
+          }
         })
         .catch((error) => {
           setHasError(true);
-          toast.error(error?.response?.data?.message);
+          toast.error(error?.message || "Something Went Wrong !");
         })
         .finally(() => {
           setIsLoading(false);
-          setFormData({
-            Code: "",
-            Name: "",
-            contactPer: "",
-            mobile: "",
-            DLNo: "",
-            GSTNo: "",
-            address: "",
-            Area: "",
-          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         });
     } else {
       toast.error("Please fill All Details");
     }
+  };
+
+  const notify = () => {
+    toast.success(response.message || " Stockiest Added Successfuly !");
   };
 
   return (
@@ -184,21 +186,6 @@ export default function AddStockiest() {
                         </p>
                       )}
                     </div>
-                    <div className="flex flex-col justify-center ">
-                      <Input
-                        type="text"
-                        label="Contact person"
-                        name="contactPer"
-                        value={formData.contactPer}
-                        onChange={handleInputChange}
-                        required
-                      />
-                      {errors.contactPer && (
-                        <p className="text-red-500  text-xs p-1">
-                          {errors.contactPer}
-                        </p>
-                      )}
-                    </div>
 
                     <div className="flex flex-col justify-center ">
                       <Input
@@ -217,7 +204,7 @@ export default function AddStockiest() {
                     </div>
                     <div className="flex flex-col justify-center ">
                       <select
-                        className="outline-none font-semibold text-gray-600 border-0 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
+                        className="outline-none font-semibold text-gray-600 border-1 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
                         id="Area"
                         name="Area"
                         value={formData.Area}
@@ -241,37 +228,7 @@ export default function AddStockiest() {
                         </p>
                       )}
                     </div>
-                    <div className="flex flex-col justify-center ">
-                      <Input
-                        type="number"
-                        label="GST NO"
-                        name="GSTNo"
-                        value={formData.GSTNo}
-                        onChange={handleInputChange}
-                        required
-                      />
-                      {errors.GSTNo && (
-                        <p className="text-red-500  text-xs p-1">
-                          {errors.GSTNo}
-                        </p>
-                      )}
-                    </div>
 
-                    <div className="flex flex-col justify-center ">
-                      <Input
-                        type="number"
-                        label="DLNo"
-                        name="DLNo"
-                        value={formData.DLNo}
-                        onChange={handleInputChange}
-                        required
-                      />
-                      {errors.DLNo && (
-                        <p className="text-red-500  text-xs p-1">
-                          {errors.DLNo}
-                        </p>
-                      )}
-                    </div>
                     <div className="flex flex-col justify-center ">
                       <Input
                         type="textarea"

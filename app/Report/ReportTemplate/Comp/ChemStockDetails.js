@@ -1,61 +1,70 @@
-import React from 'react'
+import React from "react";
 
-export default function ChemStockDetails() {
+export default function ChemStockDetails({ AllChemByDate }) {
+
+  console.log(AllChemByDate,"chem");
+
   return (
-   <>
-    <table class="border border-1 border-black text-center">
-          <thead>
-            <tr>
-              <th class="border border-black text-center text-sm font-bold text-gray-800 p-1">
+    <>
+     <table class="border  border-black text-center">
+        <thead>
+          {AllChemByDate?.length === 0 ? (
+            <th class="border border-black text-center text-xs font-bold text-gray-800  ">
+              #####_No Data Available_#####
+            </th>
+          ) : (
+            <tr className="p-1">
+              <th class="border border-black text-center text-xs font-bold text-gray-800  ">
                 SR.NO
               </th>
-              <th class="border border-black text-center text-sm font-bold text-gray-800 p-1">
+              <th class="border border-black text-center text-xs font-bold text-gray-800  ">
                 Code no
               </th>
-              <th class="border border-black text-center text-sm font-bold text-gray-800 p-1">
+              <th class="border border-black text-center text-xs font-bold text-gray-800  ">
                 Chemist Name
               </th>
-              <th class="border border-black text-center text-sm font-bold text-gray-800 p-1">
+
+              <th class="border border-black text-center text-xs font-bold text-gray-800  ">
                 POB
               </th>
-              <th class="border border-black text-center text-sm font-bold text-gray-800 p-1">
-                SR.NO
-              </th>
-              <th class="border border-black text-center text-sm font-bold text-gray-800 p-1">
-                Code no
-              </th>
-              <th class="border border-black text-center text-sm font-bold text-gray-800 p-1">
-                Stockiest Name
-              </th>
-              <th class="border border-black text-center text-sm font-bold text-gray-800 p-1">
-                Collection
-              </th>
-              <th class="border border-black text-center text-sm font-bold text-gray-800 p-1">
-                Order Quantity
-              </th>
-              <th class="border border-black text-center text-sm font-bold text-gray-800 p-1">
-                value
-              </th>
             </tr>
-          </thead>
+          )}
+        </thead>
 
-          <tbody>
-            <tr>
-              <td class="border border-black p-1 text-sm">1</td>
-              <td class="border border-black p-1 text-sm">aljshjb</td>
-              <td class="border border-black p-1 text-sm">
-                chaitanya sanjay chaudhari
-              </td>
-              <td class="border border-black p-1 text-sm">mbbs</td>
-              <td class="border border-black p-1 text-sm">brain</td>
-              <td class="border border-black p-1 text-sm">Product 1</td>
-              <td class="border border-black p-1 text-sm">Product 2</td>
-              <td class="border border-black p-1 text-sm">Sample 1</td>
-              <td class="border border-black p-1 text-sm">Sample 2</td>
-              <td class="border border-black p-1 text-sm">Yes</td>
-            </tr>
-          </tbody>
-        </table>
-   </>
-  )
+        <tbody>
+          {AllChemByDate?.map((i, index) => {
+            return (
+              <>
+                <tr className="p-1" key={i}>
+                  <td class="border border-black  text-xs">{index + 1}</td>
+                  <td class="border border-black  text-xs">{i.chemCode}</td>
+                  <td class="border border-black  text-xs">{i.chemName}</td>
+                  {i?.Pob?.map((key) => {
+                    return (
+                      <>
+                        <td key={key} class="border border-black  text-[10px]">
+                          Product :{" "}
+                          <span className="text-[10px] font-semibold text-black">
+                            {key.Product}
+                          </span>{" "}
+                          | Qnt :{" "}
+                          <span className="text-[10px] font-semibold text-black">
+                            {key.Qnt}
+                          </span>{" "}
+                          | value :{" "}
+                          <span className="text-[10px] font-semibold text-black">
+                            {Number(key.Qnt) * Number(key.value)}
+                          </span>
+                        </td>
+                      </>
+                    );
+                  })}
+                </tr>
+              </>
+            );
+          })}
+        </tbody>
+      </table> 
+    </>
+  );
 }

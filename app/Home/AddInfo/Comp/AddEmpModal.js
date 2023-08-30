@@ -335,7 +335,7 @@ export default function AddEmpModal() {
                     </div>
                     <div>
                       <select
-                        className="outline-none font-semibold text-gray-600 border-0 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
+                        className="outline-none font-semibold text-gray-600 border-1 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
                         id="post"
                         name="post"
                         value={formData.post}
@@ -365,7 +365,7 @@ export default function AddEmpModal() {
                     </div>
                     <div>
                       <select
-                        className="outline-none font-semibold text-gray-600 border-0 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
+                        className="outline-none font-semibold text-gray-600 border-1 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
                         id="headquarters"
                         name="headquarters"
                         value={formData.headquarters}

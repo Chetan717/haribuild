@@ -10,17 +10,13 @@ export default function MainHome() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center  gap-10   m-2 rounded-lg bordr bordr-1 border-gray-00 mb-24">
+      <div className="flex flex-col  w-full border border- justify-center items-center  ">
         <div>
           <h1 className="font-bold text-xl mt-10 text-gray-600">
-            Welcome to Avirosa pharmasuticles !
+            Welcome to Avirosa Pharmachem Pvt.Ltd !
           </h1>
         </div>
-        <DashInfo />
-        <AddInfo />
-        {/* <MainTab/> */}
-        {/* <ListOfEmp /> */}
-        {/* <AddUserForm /> */}
+        {/* <DashInfo /> */}
       </div>
     </>
   );

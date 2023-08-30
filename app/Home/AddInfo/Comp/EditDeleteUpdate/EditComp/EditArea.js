@@ -21,9 +21,10 @@ import {
   Radio,
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
-
+import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 export default function EditArea({ item }) {
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
+  const {fetchData} = useGlobalContext()
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const [typSel, setTypSel] = React.useState("");
@@ -101,14 +102,13 @@ export default function EditArea({ item }) {
         .finally(() => {
           setIsLoading(false);
         });
+        fetchData()
     } else {
       toast.error("Please fill All Details");
     }
   };
 
-  const notify = () => {
-    toast.success(response.message || " Area Updated !");
-  };
+ 
 
   const handleDelete = (idparam) => {
     const apiUrl = `${Server}/add/area/${idparam}`;
@@ -135,6 +135,7 @@ export default function EditArea({ item }) {
       .finally(() => {
         setIsLoading(false);
         notifyd();
+        fetchData()
       });
   };
 

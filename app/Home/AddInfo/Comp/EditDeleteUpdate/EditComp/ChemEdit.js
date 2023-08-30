@@ -2,10 +2,11 @@
 import React from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import edit from "../../../../../icons/edit.webp";
-import del from "../../../../../icons/delete-outline.webp";
+import edit from "../../../../../img/edit.webp";
+import del from "../../../../../img/delete.webp";
 import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
+import { Chip } from "@nextui-org/react";
 import {
   Modal,
   ModalContent,
@@ -25,9 +26,28 @@ import {
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
+
+export const CheckIcon = ({ size, height, width, ...props }) => {
+  return (
+    <svg
+      width={size || width || 24}
+      height={size || height || 24}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
+
 export default function ChemEdit({ item }) {
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
-  const { AreasOption } = useGlobalContext();
+  const { AreasOption, fetchData } = useGlobalContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const sizes = ["5xl"];
@@ -40,6 +60,7 @@ export default function ChemEdit({ item }) {
   const [formData, setFormData] = React.useState({
     chemCode: "",
     chemName: "",
+    contactPer: "",
     mobile: "",
     address: "",
     Area: "",
@@ -49,8 +70,16 @@ export default function ChemEdit({ item }) {
 
   React.useEffect(() => {
     // Destructure the properties from the 'item'
-    const { chemCode, chemName, mobile, address, Area, DLNo, GSTNo } =
-      item || {};
+    const {
+      chemCode,
+      chemName,
+      mobile,
+      address,
+      Area,
+      contactPer,
+      DLNo,
+      GSTNo,
+    } = item || {};
 
     // Update the 'formData' state with the values from 'item'
     setFormData({
@@ -60,6 +89,7 @@ export default function ChemEdit({ item }) {
       address,
       Area,
       DLNo,
+      contactPer,
       GSTNo,
     });
   }, [item]); // Dependency array with 'item'
@@ -74,6 +104,9 @@ export default function ChemEdit({ item }) {
     }
     if (!formData.chemName) {
       newErrors.chemName = "Chemist Name is required";
+    }
+    if (!formData.contactPer) {
+      newErrors.contactPer = "Contact Name is required";
     }
     if (!formData.mobile) {
       newErrors.mobile = "Mobile No. is required";
@@ -110,6 +143,32 @@ export default function ChemEdit({ item }) {
   const [hasError, setHasError] = React.useState(false);
   const [response, setResponse] = React.useState({});
 
+  const handleApproved = (idparam, status) => {
+    if (validateForm()) {
+      const apiUrl = `${Server}/add/chem/${idparam}`;
+      setIsLoading(true);
+      setHasError(false);
+
+      axios
+        .put(apiUrl, { approved: status })
+        .then((response) => {
+          const responseData = response.data;
+          setResponse(responseData);
+
+          toast.success(`${response?.data?.message}`);
+        })
+        .catch((error) => {
+          setHasError(true);
+          toast.error(error?.response?.data?.message);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      toast.error("Please fill All Details");
+    }
+  };
+
   const handleSubmit = (idparam) => {
     if (validateForm()) {
       const apiUrl = `${Server}/add/chem/${idparam}`;
@@ -130,6 +189,7 @@ export default function ChemEdit({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
+          fetchData();
         });
     } else {
       toast.error("Please fill All Details");
@@ -155,6 +215,9 @@ export default function ChemEdit({ item }) {
       })
       .finally(() => {
         setIsLoading(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       });
   };
 
@@ -176,7 +239,7 @@ export default function ChemEdit({ item }) {
         {sizes.map((size) => (
           <div
             key={size}
-            className="flex flex-row justify-center items-center gap-3"
+            className="flex flex-row gap-3 justify-center items-center"
           >
             <Image
               onClick={() => handleOpen(size)}
@@ -186,14 +249,76 @@ export default function ChemEdit({ item }) {
               height={20}
               alt="icons"
             />
-            <Image
-              className="cursor-pointer"
-              src={del}
-              width={20}
-              height={20}
-              alt="icons"
-              onClick={() => handleDelete(item._id)}
-            />
+
+            <Dropdown>
+              <DropdownTrigger>
+                <Image
+                  className="cursor-pointer"
+                  src={del}
+                  width={20}
+                  height={20}
+                  alt="icons"
+                />
+              </DropdownTrigger>
+              <DropdownMenu
+                aria-label="Dropdown Variants"
+                color="default"
+                variant="solid"
+              >
+                <DropdownItem
+                  key="delete"
+                  className="text-danger"
+                  color="danger"
+                  onClick={() => handleDelete(item._id)}
+                >
+                  Confirm Delete
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+
+            <Dropdown>
+              <DropdownTrigger>
+                {item?.approved === true ? (
+                  <Chip
+                    startContent={<CheckIcon size={18} />}
+                    variant="faded"
+                    color="success"
+                  >
+                    Approved
+                  </Chip>
+                ) : (
+                  <Chip color="warning" variant="dot">
+                    UnApproved
+                  </Chip>
+                )}
+              </DropdownTrigger>
+              <DropdownMenu
+                aria-label="Dropdown Variants"
+                color="default"
+                variant="solid"
+              >
+                <DropdownItem
+                  key="delete"
+                  className="text-danger"
+                  color="default"
+                >
+                  <div className="flex flex-row gap-3 ">
+                    <p
+                      onClick={() => handleApproved(item._id, true)}
+                      className="bg-black text-xs rounded-lg text-white p-1.5"
+                    >
+                      Appoved
+                    </p>
+                    <p
+                      onClick={() => handleApproved(item._id, false)}
+                      className="bg-black text-xs rounded-lg text-white p-1.5 "
+                    >
+                      UnAppoved
+                    </p>
+                  </div>
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           </div>
         ))}
       </div>
@@ -243,7 +368,21 @@ export default function ChemEdit({ item }) {
                         </p>
                       )}
                     </div>
-
+                    <div className="flex flex-col justify-center ">
+                      <Input
+                        type="text"
+                        label="Contact Person "
+                        name="contactPer"
+                        value={formData.contactPer}
+                        onChange={handleInputChange}
+                        required
+                      />
+                      {errors.contactPer && (
+                        <p className="text-red-500  text-xs p-1">
+                          {errors.contactPer}
+                        </p>
+                      )}
+                    </div>
                     <div className="flex flex-col justify-center ">
                       <Input
                         type="tel"
@@ -262,7 +401,7 @@ export default function ChemEdit({ item }) {
                     <div className="flex flex-col justify-center ">
                       <p className="text-sm p-1 text-gray-600">Select Area</p>
                       <select
-                        className="outline-none font-semibold text-gray-600 border-0 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
+                        className="outline-none font-semibold text-gray-600 border-1 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
                         id="Area"
                         name="Area"
                         value={formData.Area}

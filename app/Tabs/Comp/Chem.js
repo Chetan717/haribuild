@@ -56,15 +56,6 @@ export default function ListOfChem() {
                     <>
                       <div className="flex flex-row justify-center items-center gap-3">
                         <ChemEdit key={item?._id} item={item ? item : item} />
-                        {item?.approved === true ? (
-                          <Button color="success" className="text-white">
-                            Approved ✅
-                          </Button>
-                        ) : (
-                          <Button color="danger" className="text-white">
-                            NotApproved ❌
-                          </Button>
-                        )}
                       </div>
                     </>
                   ) : (

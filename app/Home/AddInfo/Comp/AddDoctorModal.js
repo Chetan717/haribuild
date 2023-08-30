@@ -30,11 +30,12 @@ export default function AddDoctorModal() {
     setSize(size);
     onOpen();
   };
-  const user = JSON.parse(localStorage?.getItem("user")) || "admin";
+  const user = JSON.parse(localStorage?.getItem("user"));
 
   const [formData, setFormData] = React.useState({
     DoctorCode: "",
     DoctorName: "",
+    HosName: "",
     mobile: "",
     address: "",
     Area: "",
@@ -46,10 +47,10 @@ export default function AddDoctorModal() {
     P2: "",
     createdBy: "",
     createdAt: new Date().toISOString().slice(0, 10),
-    approved: false,
+    approved: true,
   });
 
-  formData.createdBy = user.userId;
+  formData.createdBy = user?.userId;
 
   const [errors, setErrors] = React.useState({});
 
@@ -61,6 +62,9 @@ export default function AddDoctorModal() {
     }
     if (!formData.DoctorName) {
       newErrors.DoctorName = "Doctor Name is required";
+    }
+    if (!formData.HosName) {
+      newErrors.HosName = "Hospital Name is required";
     }
     if (!formData.mobile) {
       newErrors.mobile = "Mobile No. is required";
@@ -109,17 +113,23 @@ export default function AddDoctorModal() {
           const responseData = response.data;
           setResponse(responseData);
 
-          toast.success(`${response?.data?.message}`);
+          if (response.status === 200) {
+            // Perform any necessary actions on success
+            notify();
+          } else {
+            setHasError(true);
+          }
         })
         .catch((error) => {
           setHasError(true);
-          toast.error(error?.response?.data?.message);
+          toast.error(error?.message || "Something Went Wrong !");
         })
         .finally(() => {
           setIsLoading(false);
           setFormData({
             DoctorCode: "",
             DoctorName: "",
+            HosName: "",
             mobile: "",
             address: "",
             Area: "",
@@ -134,6 +144,10 @@ export default function AddDoctorModal() {
     } else {
       toast.error("Please fill All Details");
     }
+  };
+
+  const notify = () => {
+    toast.success(response?.message || " Doctor Added Successfuly !");
   };
 
   return (
@@ -153,30 +167,20 @@ export default function AddDoctorModal() {
 
       <div className="flex flex-wrap gap-3">
         {sizes.map((size) => (
-          <div
-            onClick={() => handleOpen(size)}
-            className="flex flex-col gap-1 justify-center items-center"
+          <Button
+            key={size}
+            size="lg"
+            className="text-black font-bold "
+            onPress={() => handleOpen(size)}
           >
-            <Image
-              width={20}
-              height={20}
-              src={doc}
-              className=" cursor-pointer "
-            />
-            <p
-              key={size}
-              size="xs"
-              className=" text-[12px] cursor-pointer  "
-              onClick={() => handleOpen(size)}
-            >
-              +Doctor
-            </p>
-          </div>
+            + Add Doctor 👨‍⚕️
+          </Button>
         ))}
       </div>
       <Modal
         size={size}
         isOpen={isOpen}
+        placement={`center`}
         scrollBehavior={`inside`}
         onClose={onClose}
       >
@@ -217,6 +221,21 @@ export default function AddDoctorModal() {
                       {errors.DoctorName && (
                         <p className="text-red-500  text-xs p-1">
                           {errors.DoctorName}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex flex-col justify-center ">
+                      <Input
+                        type="text"
+                        label="Hospital Name"
+                        name="HosName"
+                        value={formData.HosName}
+                        onChange={handleInputChange}
+                        required
+                      />
+                      {errors.HosName && (
+                        <p className="text-red-500  text-xs p-1">
+                          {errors.HosName}
                         </p>
                       )}
                     </div>
@@ -292,7 +311,7 @@ export default function AddDoctorModal() {
                     <div className="flex flex-col justify-center ">
                       <p className="text-sm p-1 text-gray-600">Select Area</p>
                       <select
-                        className="outline-none font-semibold text-gray-600 border-0 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
+                        className="outline-none font-semibold text-gray-600 border-1 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
                         id="Area"
                         name="Area"
                         value={formData.Area}
@@ -335,7 +354,7 @@ export default function AddDoctorModal() {
                     <div className="flex flex-col justify-center ">
                       <p className="text-sm p-1">Product 1</p>
                       <select
-                        className="outline-none font-semibold text-gray-600 border-0 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
+                        className="outline-none font-semibold text-gray-600 border-1 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
                         id="Area"
                         name="P1"
                         value={formData.P1}
@@ -358,7 +377,7 @@ export default function AddDoctorModal() {
                     <div className="flex flex-col justify-center ">
                       <p className="text-sm p-1">Product 2</p>
                       <select
-                        className="outline-none font-semibold text-gray-600 border-0 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
+                        className="outline-none font-semibold text-gray-600 border-1 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
                         id="P2"
                         name="P2"
                         value={formData.P2}

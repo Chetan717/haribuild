@@ -19,59 +19,59 @@ export default function AllDataContext({ children }) {
   const [flag, setFlag] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [
-          userDataResponse,
-          docResponse,
-          chemResponse,
-          areaResponse,
-          headqResponse,
-          stdfareResponse,
-          proRateResponse,
-          stockResponse,
-        ] = await axios.all([
-          axios.get(`${Server}/user/UserDetail`),
-          axios.get(`${Server}/add/doc`),
-          axios.get(`${Server}/add/chem`),
-          axios.get(`${Server}/add/area`),
-          axios.get(`${Server}/add/headq`),
-          axios.get(`${Server}/add/stdfare`),
-          axios.get(`${Server}/add/proRate`),
-          axios.get(`${Server}/add/stock`),
-        ]);
-
-        setAllEmpData({
-          userData: userDataResponse.data,
-        });
-        setAllDoc({
-          docData: docResponse.data,
-        });
-        setAllChem({
-          chemData: chemResponse.data,
-        });
-        setAllArea({
-          areaData: areaResponse,
-        });
-        setAllHeadQ({
-          headqData: headqResponse,
-        });
-        setAllStdFare({
-          stdfareData: stdfareResponse.data,
-        });
-        setAllProdRate({
-          proRateData: proRateResponse.data,
-        });
-        setAllStockiest({
-          stockData: stockResponse.data,
-        });
-
-        setFlag(true);
-      } catch (error) {}
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const [
+        userDataResponse,
+        docResponse,
+        chemResponse,
+        areaResponse,
+        headqResponse,
+        stdfareResponse,
+        proRateResponse,
+        stockResponse,
+      ] = await axios.all([
+        axios.get(`${Server}/user/UserDetail`),
+        axios.get(`${Server}/add/doc`),
+        axios.get(`${Server}/add/chem`),
+        axios.get(`${Server}/add/area`),
+        axios.get(`${Server}/add/headq`),
+        axios.get(`${Server}/add/stdfare`),
+        axios.get(`${Server}/add/proRate`),
+        axios.get(`${Server}/add/stock`),
+      ]);
+
+      setAllEmpData({
+        userData: userDataResponse.data,
+      });
+      setAllDoc({
+        docData: docResponse.data,
+      });
+      setAllChem({
+        chemData: chemResponse.data,
+      });
+      setAllArea({
+        areaData: areaResponse,
+      });
+      setAllHeadQ({
+        headqData: headqResponse,
+      });
+      setAllStdFare({
+        stdfareData: stdfareResponse.data,
+      });
+      setAllProdRate({
+        proRateData: proRateResponse.data,
+      });
+      setAllStockiest({
+        stockData: stockResponse.data,
+      });
+
+      setFlag(true);
+    } catch (error) {}
+  };
 
   const headquaters = allHeadQ?.headqData?.data?.map(
     (key) => key.HeadQuaterName
@@ -91,6 +91,7 @@ export default function AllDataContext({ children }) {
       AreasOption,
       allProdRate,
       flag,
+      fetchData,
     };
   }, [allEmpData]);
 

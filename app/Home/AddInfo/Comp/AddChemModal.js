@@ -2,6 +2,8 @@
 import React from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import med from "../../../img/med.webp";
+import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
 import {
   Modal,
@@ -20,14 +22,14 @@ export default function AddChemist() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
-  const sizes = ["5xl"];
+  const sizes = ["full"];
 
-  const { AreasOption } = useGlobalContext();
+  const { AreasOption, fetchData } = useGlobalContext();
   const handleOpen = (size) => {
     setSize(size);
     onOpen();
   };
-
+  const user = JSON.parse(localStorage?.getItem("user")) || "admin";
   const [formData, setFormData] = React.useState({
     chemCode: "",
     chemName: "",
@@ -37,8 +39,12 @@ export default function AddChemist() {
     Area: "",
     DLNo: "",
     GSTNo: "",
+    createdBy: "",
+    createdAt: new Date().toISOString().slice(0, 10),
     approved: true,
   });
+
+  formData.createdBy = user?.userId;
 
   const [errors, setErrors] = React.useState({});
 
@@ -105,7 +111,9 @@ export default function AddChemist() {
             Area: "",
             DLNo: "",
             GSTNo: "",
+            createdAt: "",
           });
+          fetchData();
         });
     } else {
       toast.error("Please fill All Details");
@@ -141,6 +149,7 @@ export default function AddChemist() {
       <Modal
         size={size}
         isOpen={isOpen}
+        placement={`center`}
         scrollBehavior={`inside`}
         onClose={onClose}
       >
@@ -217,9 +226,9 @@ export default function AddChemist() {
                       )}
                     </div>
                     <div className="flex flex-col justify-center ">
-                    <p className="text-sm p-1 text-gray-600">Select Area</p>
+                      <p className="text-sm p-1 text-gray-600">Select Area</p>
                       <select
-                        className="outline-none font-semibold text-gray-600 border-0 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
+                        className="outline-none font-semibold text-gray-600 border-1 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
                         id="Area"
                         name="Area"
                         value={formData.Area}

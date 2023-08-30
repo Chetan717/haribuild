@@ -23,11 +23,12 @@ import {
 import { Input } from "@nextui-org/react";
 
 import InputList from "../../EmerncyAdject/InputList";
-
+import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 export default function EditProdRate({ item }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
+  const { fetchData } = useGlobalContext();
   const sizes = ["4xl"];
 
   const handleOpen = (size) => {
@@ -125,6 +126,7 @@ export default function EditProdRate({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
+          fetchData();
         });
     } else {
       toast.error("Please fill All Details");
@@ -160,6 +162,7 @@ export default function EditProdRate({ item }) {
       .finally(() => {
         setIsLoading(false);
         notifyd();
+        fetchData();
       });
   };
 

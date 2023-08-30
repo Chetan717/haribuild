@@ -26,7 +26,7 @@ export default function EditFarChart({ item }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
-  const { headquaters, AreasOption } = useGlobalContext();
+  const { headquaters, AreasOption ,fetchData} = useGlobalContext();
   const sizes = ["5xl"];
 
   const handleOpen = (size) => {
@@ -127,15 +127,14 @@ export default function EditFarChart({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
+          fetchData()
         });
     } else {
       toast.error("Please fill All Details");
     }
   };
 
-  const notify = () => {
-    toast.success(response.message || " Fare Chart Updated !");
-  };
+ ;
 
   const handleDelete = (idparam) => {
     const apiUrl = `${Server}/add/stdfare/${idparam}`;
@@ -162,6 +161,7 @@ export default function EditFarChart({ item }) {
       .finally(() => {
         setIsLoading(false);
         notifyd();
+        fetchData()
       });
   };
 

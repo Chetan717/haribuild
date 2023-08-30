@@ -56,15 +56,6 @@ export default function ListOfStock() {
                         key={item?._id}
                         item={item ? item : item}
                       />
-                      {item?.approved === true ? (
-                        <Button color="success" className="text-white">
-                          Approved ✅
-                        </Button>
-                      ) : (
-                        <Button color="danger" className="text-white">
-                          NotApproved ❌
-                        </Button>
-                      )}
                     </div>
                   ) : (
                     item[columnKey]

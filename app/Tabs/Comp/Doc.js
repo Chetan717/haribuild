@@ -17,7 +17,7 @@ export default function ListOfDoc() {
 
   const user = allDoc.docData;
 
-  console.log(allDoc, "doc");
+
 
   if (!user || user.length === 0) {
     return <div>No data available.</div>;
@@ -30,8 +30,6 @@ export default function ListOfDoc() {
     "Speciality",
     "Degree",
     "mobile",
-    "address",
-    "Dob",
 
     "Area",
     "Actions",
@@ -59,15 +57,6 @@ export default function ListOfDoc() {
                   {columnKey === "Actions" ? (
                     <div className="flex flex-row justify-center items-center gap-3">
                       <DocEdit key={item?._id} item={item ? item : item} />
-                      {item?.approved === true ? (
-                        <Button color="success" className="text-white">
-                          Approved ✅
-                        </Button>
-                      ) : (
-                        <Button color="danger" className="text-white">
-                          NotApproved ❌
-                        </Button>
-                      )}
                     </div>
                   ) : (
                     item[columnKey]
