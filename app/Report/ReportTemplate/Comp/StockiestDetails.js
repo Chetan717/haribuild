@@ -30,6 +30,9 @@ export default function StockiestDetails({ AllStockByDate }) {
               >
                 POB
               </th>
+              <th class="border border-black text-center text-xs font-bold text-gray-800  ">
+                Location
+              </th>
             </tr>
           )}
         </thead>
@@ -68,6 +71,9 @@ export default function StockiestDetails({ AllStockByDate }) {
                       </>
                     );
                   })}
+                  <td class="border border-black  text-[10px]">
+                    lat : {i.lat} , log : {i.log}
+                  </td>
                 </tr>
               </>
             );

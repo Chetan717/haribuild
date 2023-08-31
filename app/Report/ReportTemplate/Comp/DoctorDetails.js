@@ -47,7 +47,10 @@ export default function DoctorDetails({ AllDocByDate }) {
                 colspan=""
                 className="border border-black text-center text-[10px] font-semibold text-gray-800 p-0"
               >
-                Sample Given
+                POB
+              </th>
+              <th class="border border-black text-center text-xs font-bold text-gray-800  ">
+                Location
               </th>
             </tr>
           )}
@@ -109,6 +112,9 @@ export default function DoctorDetails({ AllDocByDate }) {
                       </>
                     );
                   })}
+                  <td class="border border-black  text-[10px]">
+                    lat : {i.lat} , log : {i.log}
+                  </td>
                 </tr>
               </>
             );

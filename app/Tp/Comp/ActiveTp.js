@@ -18,6 +18,7 @@ import { Card, CardBody } from "@nextui-org/react";
 import axios from "axios";
 import { Spinner } from "@nextui-org/react";
 import EditTour from "./ActiveTpEdit/EditTour";
+import TpReport from "../Report/TpReport";
 
 export const CheckIcon = ({ size, height, width, ...props }) => {
   return (
@@ -60,7 +61,7 @@ export default function Activetp({ setActive, HandleDelete }) {
   };
 
   const ActiveProgram = tp?.filter((itm) => itm.Act === true);
- 
+
   if (loading) {
     return (
       <>
@@ -104,6 +105,7 @@ export default function Activetp({ setActive, HandleDelete }) {
                       {moment(i.startDate).format("DD/MM/YYYY")}_to_
                       {moment(i.lastDate).format("DD/MM/YYYY")}
                     </p>
+                    <TpReport dcr={i} />
                     <div className="flex flex-row gap-3 mt-2 justify-center items-center">
                       {/* <Image
                       className="cursor-pointer"

@@ -75,7 +75,7 @@ const tabs = [
     link: "/CreateTourProgram",
     icon: <EventDetailIcon />,
   },
-  { name: "Reporting", link: "/TourProgram", icon: <DocPassIcon /> },
+  { name: "DCR Reports", link: "/TourProgram", icon: <DocPassIcon /> },
   { name: "Product", link: "/", icon: <GridIcon /> },
   { name: "Attachment", link: "/", icon: <AttachmentIcon /> },
   { name: "Accounts", link: "/", icon: <AdminIcon /> },

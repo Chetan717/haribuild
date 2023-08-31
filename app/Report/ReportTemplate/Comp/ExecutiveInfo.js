@@ -2,13 +2,12 @@ import React from "react";
 import moment from "moment";
 moment().format();
 
-export default function ExecutiveInfo({ AllDocByDate }) {
+export default function ExecutiveInfo({ AllDocByDate, dcrID }) {
   const userId = JSON.parse(localStorage?.getItem("user")) || "admin";
-  console.log(AllDocByDate, "dc");
 
-  // const { area, DcrId, createdAt, workWith } = AllDocByDate[0] || AllDocByDate;
-
-  const { empName, headquarters, mobile1, post, selectedAreas } = userId;
+  // const data = AllDocByDate[0] || AllDocByDate;
+  // const { Area, DcrId, createdAt, workWith } = data;
+  // const { empName, headquarters, mobile1, post, selectedAreas } = userId;
 
   return (
     <>
@@ -24,9 +23,7 @@ export default function ExecutiveInfo({ AllDocByDate }) {
             <th class="border border-black text-center text-[10px] font-bold text-gray-800 p-0.5">
               Designation
             </th>
-            <th class="border border-black text-center text-[10px] font-bold text-gray-800 p-0.5">
-              Headquarters
-            </th>
+
             <th class="border border-black text-center text-[10px] font-bold text-gray-800 p-0.5">
               Actual_TP
             </th>
@@ -36,44 +33,45 @@ export default function ExecutiveInfo({ AllDocByDate }) {
             <th class="border border-black text-center text-[10px] font-bold text-gray-800 p-0.5">
               DCR_ID
             </th>
-            <th class="border border-black text-center text-[10px] font-bold text-gray-800 p-0.5">
-              Work_at
-            </th>
+
             <th class="border border-black text-center text-[10px] font-bold text-gray-800 p-0.5">
               Departmental Remark Only
             </th>
           </tr>
         </thead>
 
-        {/* <tbody>
+        <tbody>
           <tr>
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
-              {empName ? empName : "-"}
+              {dcrID[0]?.createdByName ? dcrID[0]?.createdByName : "-"}
             </td>
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
-              {moment(createdAt).format("DD/MM/YYYY")}
+              {moment(dcrID[0]?.createdAt).format("DD/MM/YYYY")}
             </td>
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
-              {post}
+              {dcrID[0]?.post}
             </td>
+            {dcrID[0]?.area?.map((i) => {
+              return (
+                <>
+                  <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
+                    {i}
+                  </td>
+                </>
+              );
+            })}
+
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
-              {headquarters}
+              {AllDocByDate === undefined ? "-" : AllDocByDate[0]?.workWith}
             </td>
+
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
-              {area}
+              {dcrID[0]?.DcrId}
             </td>
-            <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
-              {workWith}
-            </td>
-            <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
-              {DcrId}
-            </td>
-            <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
-              {"-"}
-            </td>
+
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5"></td>
           </tr>
-        </tbody> */}
+        </tbody>
       </table>
     </>
   );

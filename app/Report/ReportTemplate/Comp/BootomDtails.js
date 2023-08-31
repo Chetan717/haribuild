@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function BootomDtails() {
+export default function BootomDtails({ cTotal, dtotal, sTotal }) {
   return (
     <>
       <table class="border  border-black text-center">
@@ -29,12 +29,12 @@ export default function BootomDtails() {
 
         <tbody>
           <tr>
-            <td class="border border-black  text-[10px]">1</td>
-            <td class="border border-black  text-[10px]">34</td>
-            <td class="border border-black  text-[10px]">45</td>
-            <td class="border border-black  text-[10px]">56</td>
-            <td class="border border-black  text-[10px]">90</td>
-            <td class="border border-black  text-[10px]">100</td>
+            <td className="border border-black  text-[10px]">{dtotal}</td>
+            <td className="border border-black  text-[10px]">{cTotal}</td>
+            <td className="border border-black  text-[10px]">{sTotal}</td>
+            <td className="border border-black  text-[10px]">-</td>
+            <td className="border border-black  text-[10px]">-</td>
+            <td className="border border-black  text-[10px]">-</td>
           </tr>
         </tbody>
       </table>

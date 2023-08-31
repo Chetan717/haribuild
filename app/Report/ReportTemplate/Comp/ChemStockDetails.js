@@ -1,12 +1,11 @@
 import React from "react";
 
 export default function ChemStockDetails({ AllChemByDate }) {
-
-  console.log(AllChemByDate,"chem");
+  console.log(AllChemByDate, "chem");
 
   return (
     <>
-     <table class="border  border-black text-center">
+      <table class="border  border-black text-center">
         <thead>
           {AllChemByDate?.length === 0 ? (
             <th class="border border-black text-center text-xs font-bold text-gray-800  ">
@@ -26,6 +25,9 @@ export default function ChemStockDetails({ AllChemByDate }) {
 
               <th class="border border-black text-center text-xs font-bold text-gray-800  ">
                 POB
+              </th>
+              <th class="border border-black text-center text-xs font-bold text-gray-800  ">
+                Location
               </th>
             </tr>
           )}
@@ -59,12 +61,15 @@ export default function ChemStockDetails({ AllChemByDate }) {
                       </>
                     );
                   })}
+                  <td class="border border-black  text-[10px]">
+                    lat : {i.lat} , log : {i.log}
+                  </td>
                 </tr>
               </>
             );
           })}
         </tbody>
-      </table> 
+      </table>
     </>
   );
 }

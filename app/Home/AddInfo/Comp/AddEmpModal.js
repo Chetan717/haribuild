@@ -345,7 +345,7 @@ export default function AddEmpModal() {
                         <option value="">Select Post</option>
                         <option value="Sale manager">Sale manager</option>
                         <option value="Buisness Devlopment Executive">
-                          Buisness Devlopment Executive
+                          Business Devlopment Executive
                         </option>
                         <option value="Zonal Sales Manager">
                           Zonal Sales Manager
@@ -354,7 +354,10 @@ export default function AddEmpModal() {
                           Area Buisness Manager
                         </option>
                         <option value="Reginol Sales Manager">
-                          Reginol Sales Manager
+                          Regional Sales Manager
+                        </option>
+                        <option value="Teratory Executive">
+                          Teratory Executive
                         </option>
                       </select>
                       {errors.post && (

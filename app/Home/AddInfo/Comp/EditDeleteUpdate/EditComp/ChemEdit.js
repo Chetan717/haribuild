@@ -215,9 +215,6 @@ export default function ChemEdit({ item }) {
       })
       .finally(() => {
         setIsLoading(false);
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
       });
   };
 
