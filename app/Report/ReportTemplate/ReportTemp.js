@@ -155,8 +155,8 @@ export default function ReportTemp({
             i?.Degree,
             i?.Speciality,
             `${i?.P1}, ${i?.P2}`,
-            i?.lit === true ? "Yes" : "No",
-            i?.Detail === true ? "Yes" : "No",
+            i?.lit,
+            i?.Detail,
             i?.Remark || "No Remark",
             i?.Pob?.map(
               (k) =>

@@ -1,7 +1,14 @@
 "use client";
 
 import { ToastContainer, toast } from "react-toastify";
-
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  RadioGroup,
+  Radio,
+} from "@nextui-org/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
@@ -15,7 +22,7 @@ export default function TpReport({ dcr }) {
   const [tp, setTp] = useState([]);
   const [loading, setLoading] = useState(false);
   const sizes = ["full"];
-
+  console.log(tp, "d");
   const getTp = (dcr) => {
     const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
     setLoading(true);
@@ -30,7 +37,6 @@ export default function TpReport({ dcr }) {
       .finally(() => {
         setLoading(false);
       });
-    generatePdf(dcr);
   };
 
   const generatePdf = () => {
@@ -124,13 +130,31 @@ export default function TpReport({ dcr }) {
         {sizes.map((size) => (
           <>
             <div className="flex flex-row  gap-5" key={size}>
-              <Button
-                size="sm"
-                onClick={() => getTp(dcr?.DcrId)}
-                color="primary"
-              >
-                Download Report
-              </Button>
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button
+                    size="sm"
+                    onClick={() => getTp(dcr?.DcrId)}
+                    color="primary"
+                  >
+                    Download Report
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  aria-label="Dropdown Variants"
+                  color="default"
+                  variant="solid"
+                >
+                  <DropdownItem
+                    key="delete"
+                    onClick={generatePdf}
+                    className="text-danger"
+                    color="danger"
+                  >
+                    Confirm Download
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
             </div>
           </>
         ))}
