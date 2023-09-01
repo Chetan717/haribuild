@@ -84,10 +84,10 @@ export default function DoctorDetails({ AllDocByDate }) {
                   </td>
 
                   <td className="border border-black p-0 text-[10px]">
-                    {i?.lit === true ? "Yes" : "No"}
+                    {i?.lit}
                   </td>
                   <td className="border border-black p-0 text-[10px]">
-                    {i?.Detail === true ? "Yes" : "No"}
+                    {i?.Detail}
                   </td>
                   <td className="border border-black p-0 text-[10px]">
                     {i?.Remark || "No Remark"}

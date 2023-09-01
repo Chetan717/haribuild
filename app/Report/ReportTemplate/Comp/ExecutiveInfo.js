@@ -51,15 +51,10 @@ export default function ExecutiveInfo({ AllDocByDate, dcrID }) {
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
               {dcrID[0]?.post}
             </td>
-            {dcrID[0]?.area?.map((i) => {
-              return (
-                <>
-                  <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
-                    {i}
-                  </td>
-                </>
-              );
-            })}
+
+            <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
+              {dcrID[0]?.area?.map((i) => i)}
+            </td>
 
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
               {AllDocByDate === undefined ? "-" : AllDocByDate[0]?.workWith}

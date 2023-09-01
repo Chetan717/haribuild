@@ -67,6 +67,7 @@ export default function Activetp({ setActive, HandleDelete }) {
       <>
         <div className="flex flex-row gap-5 justify-center items-center  ">
           <Spinner />
+          
           <p>Data is loaded Wait....</p>
         </div>
       </>
@@ -82,7 +83,7 @@ export default function Activetp({ setActive, HandleDelete }) {
               <>
                 <Card>
                   <CardBody className="flex flex-col gap-1 justify-center items-center">
-                    <EditTour dcr={i} />
+                    <EditTour dcr={i} HandleDelete={HandleDelete} />
                     <p>
                       {/* Make beautiful websites regardless of your design
                     experience. Act : true Apv : true DcrId : "1693145736871"

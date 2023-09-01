@@ -17,7 +17,8 @@ moment().format();
 import { Card, CardBody } from "@nextui-org/react";
 import axios from "axios";
 import { Spinner } from "@nextui-org/react";
-
+import EditTour from "./ActiveTpEdit/EditTour";
+import TpReport from "../Report/TpReport";
 
 export const CheckIcon = ({ size, height, width, ...props }) => {
   return (
@@ -37,8 +38,7 @@ export const CheckIcon = ({ size, height, width, ...props }) => {
   );
 };
 
-export default function Approvedtp({ setApproved, HandleDelete }) {
-  const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
+export default function SendedToApv({ setApproved, HandleDelete }) {
   const [tp, setTp] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -61,7 +61,7 @@ export default function Approvedtp({ setApproved, HandleDelete }) {
   };
 
   const ActiveProgram = tp?.filter(
-    (itm) => itm.Act === true && itm.Apv === true
+    (itm) => itm.Act === true && itm.SentToApv === true && itm.Apv === false
   );
 
   if (loading) {
@@ -69,6 +69,7 @@ export default function Approvedtp({ setApproved, HandleDelete }) {
       <>
         <div className="flex flex-row gap-5 justify-center items-center  ">
           <Spinner />
+
           <p>Data is loaded Wait....</p>
         </div>
       </>
@@ -84,7 +85,7 @@ export default function Approvedtp({ setApproved, HandleDelete }) {
               <>
                 <Card>
                   <CardBody className="flex flex-col gap-1 justify-center items-center">
-                  
+                    <EditTour dcr={i} HandleDelete={HandleDelete} />
                     <p>
                       {/* Make beautiful websites regardless of your design
                     experience. Act : true Apv : true DcrId : "1693145736871"
@@ -107,6 +108,7 @@ export default function Approvedtp({ setApproved, HandleDelete }) {
                       {moment(i.startDate).format("DD/MM/YYYY")}_to_
                       {moment(i.lastDate).format("DD/MM/YYYY")}
                     </p>
+                    <TpReport dcr={i} />
                     <div className="flex flex-row gap-3 mt-2 justify-center items-center">
                       {/* <Image
                       className="cursor-pointer"
@@ -172,18 +174,25 @@ export default function Approvedtp({ setApproved, HandleDelete }) {
                                 onClick={() => setApproved(i._id, true, getTp)}
                                 className="bg-black text-xs rounded-lg text-white p-1.5"
                               >
-                                Appoved
+                                Approved
                               </p>
                               <p
                                 onClick={() => setApproved(i._id, false, getTp)}
                                 className="bg-black text-xs rounded-lg text-white p-1.5 "
                               >
-                                UnAppoved
+                                UnApproved
                               </p>
                             </div>
                           </DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
+                      <Chip color="warning" variant="dot">
+                        {i.lastDate === Date.now()
+                          ? "Today is last date"
+                          : "LastDate" +
+                            `:` +
+                            moment(i.lastDate).format("DD/MM/YYYY")}
+                      </Chip>
                     </div>
                   </CardBody>
                 </Card>

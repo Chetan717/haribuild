@@ -381,7 +381,7 @@ export default function CreateTour({ TpData, getDataTour }) {
                         <option value="Holiday">Holiday</option>
 
                         <option value="Administration">Administration</option>
-                        <option value="Metting">Meeting</option>
+                        <option value="Meeting">Meeting</option>
                       </select>
                       {errors.Activity && (
                         <p className="text-red-500  text-xs p-1">

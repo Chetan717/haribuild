@@ -11,6 +11,7 @@ import Activetp from "./ActiveTp";
 import Expiredtp from "./ExpiredTp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SendedToApv from "./SendedToApv";
 
 export default function MainTp() {
   const variants = ["underlined"];
@@ -71,7 +72,7 @@ export default function MainTp() {
     setHasError(false);
 
     axios
-      .delete(apiUrl, formData)
+      .delete(apiUrl)
       .then((response) => {
         const responseData = response.data;
         setResponse(responseData);
@@ -110,9 +111,19 @@ export default function MainTp() {
             className=""
             aria-label="Tabs variants"
           >
-            <Tab key="Approved" title="Approved">
+            <Tab key="Reqeusted To Approve" title="Reqeusted To Approve">
               <Card>
                 <CardBody className="grid grid-cols-3 gap-4">
+                  <SendedToApv
+                    setApproved={setApproved}
+                    HandleDelete={HandleDelete}
+                  />
+                </CardBody>
+              </Card>{" "}
+            </Tab>
+            <Tab key="Approved" title="Approved">
+              <Card>
+                <CardBody className="grid grid-cols-5 gap-4">
                   <Approvedtp
                     setApproved={setApproved}
                     HandleDelete={HandleDelete}
@@ -122,7 +133,7 @@ export default function MainTp() {
             </Tab>
             <Tab key="UnApproved" title="UnApproved">
               <Card>
-                <CardBody className="grid grid-cols-3 gap-4">
+                <CardBody className="grid grid-cols-5 gap-4">
                   <UnApproved
                     setApproved={setApproved}
                     HandleDelete={HandleDelete}
@@ -139,7 +150,7 @@ export default function MainTp() {
             </Tab>
             <Tab key="Expired" title="Expired">
               <Card>
-                <CardBody className="grid grid-cols-3 gap-4">
+                <CardBody className="grid grid-cols-5 gap-4">
                   <Expiredtp
                     setActive={setActive}
                     HandleDelete={HandleDelete}

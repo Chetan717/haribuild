@@ -33,7 +33,6 @@ export default function ListByDate({ dcr }) {
   const [tp, setTp] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-   
     setLoading(true);
     axios
       .get(`${Server}/add/tourDateUser/${user.userId}`)

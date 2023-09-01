@@ -22,7 +22,6 @@ import TourDateList from "./TourDateList";
 export default function EditTourDate({ item, getDataTour }) {
   const { allArea } = useGlobalContext();
 
-
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const sizes = ["5xl"];
@@ -149,13 +148,12 @@ export default function EditTourDate({ item, getDataTour }) {
     const apiUrl = `${Server}/add/tourDate/${idparam}`;
     setIsLoading(true);
     setHasError(false);
-
     axios
-      .delete(apiUrl, formData)
+      .delete(apiUrl)
       .then((response) => {
         const responseData = response.data;
         setResponse(responseData);
-
+        console.log(responseData);
         toast.success(`${response?.data?.message}`);
       })
       .catch((error) => {
@@ -164,7 +162,7 @@ export default function EditTourDate({ item, getDataTour }) {
       })
       .finally(() => {
         setIsLoading(false);
-        getDataTour()
+        getDataTour();
       });
   };
 
@@ -193,13 +191,14 @@ export default function EditTourDate({ item, getDataTour }) {
               alt="icon"
               src={edit}
             />
-            <Image
-              onClick={() => handleDelete(item._id)}
+            {/* <Image
+              // onClick={() => handleDelete(item._id)}
+              onClick={dele}
               width={20}
               height={20}
               alt="icon"
               src={del}
-            />
+            /> */}
           </div>
         </>
       ))}

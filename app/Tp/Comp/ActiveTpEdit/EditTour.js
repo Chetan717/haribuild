@@ -545,7 +545,7 @@ import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 import ListByDate from "@/app/CreateTourProgram/Comp/ListByDate";
 import TourDateList from "@/app/CreateTourProgram/Comp/TourDateList";
 
-export default function EditTour({ dcr }) {
+export default function EditTour({ dcr, HandleDelete }) {
   const { allArea } = useGlobalContext();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -586,6 +586,7 @@ export default function EditTour({ dcr }) {
             <Image
               width={20}
               height={20}
+              onClick={() => HandleDelete(dcr?._id)}
               className="cursor-pointer"
               alt="icon"
               src={del}
