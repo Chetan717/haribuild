@@ -41,41 +41,6 @@ export default function ReportTemp({
 
   const [seldate, setSeldate] = useState("");
 
-  // const [allDoc, setAllDoc] = useState([]);
-  // const [allChem, setAllChem] = useState([]);
-
-  // const [allStockiest, setAllStockiest] = useState([]);
-  // const [flag, setFlag] = useState(false);
-  // // const tpAct = SetActiveProgram[0] || {};
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
-  //     try {
-  //       const [docResponse, chemResponse, stockResponse] = await axios.all([
-  //         axios.get(`${Server}/add/docTourId/${i.DcrId}`),
-  //         axios.get(`${Server}/add/chemTourId/${i.DcrId}`),
-  //         axios.get(`${Server}/add/stockTourId/${i.DcrId}`),
-  //       ]);
-
-  //       setAllDoc({
-  //         docData: docResponse.data,
-  //       });
-  //       setAllChem({
-  //         chemData: chemResponse.data,
-  //       });
-
-  //       setAllStockiest({
-  //         stockData: stockResponse.data,
-  //       });
-
-  //       setFlag(true);
-  //     } catch (error) {}
-  //   };
-
-  //   fetchData();
-  // }, [seldate]);
-
-  // console.log(allChem, "all doc");
   // //  fijnf dthe dates
   const start_date = new Date(dcrID?.startDate);
   const end_date = new Date(dcrID?.lastDate);

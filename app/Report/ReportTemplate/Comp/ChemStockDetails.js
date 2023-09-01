@@ -1,8 +1,6 @@
 import React from "react";
 
 export default function ChemStockDetails({ AllChemByDate }) {
-  console.log(AllChemByDate, "chem");
-
   return (
     <>
       <table class="border  border-black text-center">

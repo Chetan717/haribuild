@@ -22,16 +22,15 @@ export default function TpReport({ dcr }) {
   const [tp, setTp] = useState([]);
   const [loading, setLoading] = useState(false);
   const sizes = ["full"];
-  console.log(tp, "d");
+
   const getTp = (dcr) => {
     const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
     setLoading(true);
-    console.log(dcr, "d");
+
     axios
       .get(`${Server}/add/tourDateUser/${dcr}`)
       .then((res) => {
         setTp(res.data);
-        console.log(res.data, "data");
       })
       .catch((err) => {})
       .finally(() => {

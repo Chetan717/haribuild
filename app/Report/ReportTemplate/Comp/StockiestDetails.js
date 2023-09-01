@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function StockiestDetails({ AllStockByDate }) {
-  console.log(AllStockByDate, "stock");
+ 
   return (
     <>
       <table class="border  border-black text-center">
