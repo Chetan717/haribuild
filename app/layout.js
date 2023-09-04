@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
                 <>
                   <div className="flex flex-row gap-2 justify-start items-start">
                     <Sidebar2 />
-                    <div className="flex flex-1 m-5 h-full border rounded-lg border-gray-200 justify-center items-center">
+                    <div className="flex flex-1 m-5 h-full borde rounded-lg border-gray-00 justify-center items-center">
                       {children}
                     </div>
                   </div>

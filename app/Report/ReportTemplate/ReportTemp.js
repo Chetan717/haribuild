@@ -74,7 +74,7 @@ export default function ReportTemp({
     // Define table data and headers for each table
     const tables = [
       {
-        title: "",
+        title: "AVIROSA PHARMACHEM DAILY CALL REPORT (DCR)",
         data: [
           [
             "Name",
@@ -98,7 +98,7 @@ export default function ReportTemp({
         },
       },
       {
-        title: "Doctor Details",
+        title: "",
         data: [
           [
             "SR.NO",
@@ -148,7 +148,7 @@ export default function ReportTemp({
       },
 
       {
-        title: "Chemist Details",
+        title: "",
         data: [
           ["SR.NO", "Code no", "Chemist Name", "POB", "Location"],
           ...AllChemByDate.map((i, index) => [
@@ -173,7 +173,7 @@ export default function ReportTemp({
         },
       },
       {
-        title: "Sctockiest Details",
+        title: "",
         data: [
           [
             "SR.NO",
@@ -233,9 +233,9 @@ export default function ReportTemp({
     // Loop through each table and render it in the PDF
     let startY = 100;
     tables.forEach((table) => {
-      doc.setFontSize(7);
-      // doc.text(table.title, 40, startY);
-      // startY += 5;
+      doc.setFontSize(15);
+      doc.text(table.title, 200, startY);
+      startY += 5;
 
       doc.autoTable({
         startY,
@@ -255,7 +255,7 @@ export default function ReportTemp({
     });
 
     // Save the PDF
-    doc.save("DCR-Report");
+    doc.save(`DCR-${name}`);
 
     // Show success notification
     toast.success("🦄 Pdf Downloaded!");

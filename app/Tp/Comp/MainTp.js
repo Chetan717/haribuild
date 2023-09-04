@@ -113,7 +113,7 @@ export default function MainTp() {
           >
             <Tab key="Reqeusted To Approve" title="Reqeusted To Approve">
               <Card>
-                <CardBody className="grid grid-cols-1 gap-4">
+                <CardBody className="grid grid-cols-3 gap-4">
                   <SendedToApv
                     setApproved={setApproved}
                     HandleDelete={HandleDelete}
@@ -123,7 +123,7 @@ export default function MainTp() {
             </Tab>
             <Tab key="Approved" title="Approved">
               <Card>
-                <CardBody className="grid grid-cols-1 gap-4">
+                <CardBody className="grid grid-cols-3 gap-4">
                   <Approvedtp
                     setApproved={setApproved}
                     HandleDelete={HandleDelete}
@@ -133,7 +133,7 @@ export default function MainTp() {
             </Tab>
             <Tab key="UnApproved" title="UnApproved">
               <Card>
-                <CardBody className="grid grid-cols-1 gap-4">
+                <CardBody className="grid grid-cols-3 gap-4">
                   <UnApproved
                     setApproved={setApproved}
                     HandleDelete={HandleDelete}
@@ -143,14 +143,14 @@ export default function MainTp() {
             </Tab>
             <Tab key="Active" title="Active">
               <Card>
-                <CardBody className="grid grid-cols-1 gap-4">
+                <CardBody className="grid grid-cols-3 gap-4">
                   <Activetp setActive={setActive} HandleDelete={HandleDelete} />
                 </CardBody>
               </Card>{" "}
             </Tab>
             <Tab key="Expired" title="Expired">
               <Card>
-                <CardBody className="grid grid-cols-1 gap-4">
+                <CardBody className="grid grid-cols-3 gap-4">
                   <Expiredtp
                     setActive={setActive}
                     HandleDelete={HandleDelete}

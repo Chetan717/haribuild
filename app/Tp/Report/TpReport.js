@@ -49,7 +49,7 @@ export default function TpReport({ dcr }) {
     // Define table data and headers for each table
     const tables = [
       {
-        title: "",
+        title: "Avirosa Pharmachem Tour Program Report",
         data: [
           ["Name", "Month", "H.Q.", "Reporting Manager"],
           [createdByName, month, area, ""],
@@ -65,7 +65,7 @@ export default function TpReport({ dcr }) {
         },
       },
       {
-        title: "Doctor Details",
+        title: "",
         data: [
           [
             "SR.NO",
@@ -98,9 +98,9 @@ export default function TpReport({ dcr }) {
     // Loop through each table and render it in the PDF
     let startY = 100;
     tables.forEach((table) => {
-      doc.setFontSize(7);
-      // doc.text(table.title, 40, startY);
-      // startY += 5;
+      doc.setFontSize(15);
+      doc.text(table.title, 150, startY);
+      startY += 5;
 
       doc.autoTable({
         startY,
@@ -120,7 +120,7 @@ export default function TpReport({ dcr }) {
     });
 
     // Save the PDF
-    doc.save("DCR-Report");
+    doc.save(`TP-${createdByName}`);
   };
 
   return (

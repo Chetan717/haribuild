@@ -57,12 +57,6 @@ export default function AddChemist() {
     if (!formData.chemName) {
       newErrors.chemName = "Chemist Name is required";
     }
-    if (!formData.chemName) {
-      newErrors.chemName = "Contact person  is required";
-    }
-    if (!formData.mobile) {
-      newErrors.mobile = "Mobile No. is required";
-    }
 
     // Add similar validation for other fields
 

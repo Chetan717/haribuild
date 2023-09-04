@@ -51,12 +51,12 @@ export default function AddStockiest() {
     if (!formData.Name) {
       newErrors.Name = "Chemist Name is required";
     }
-    if (!formData.mobile) {
-      newErrors.mobile = "Mobile No. is required";
-    }
-    if (!formData.address) {
-      newErrors.address = "Address is required";
-    }
+    // if (!formData.mobile) {
+    //   newErrors.mobile = "Mobile No. is required";
+    // }
+    // if (!formData.address) {
+    //   newErrors.address = "Address is required";
+    // }
 
     // Add similar validation for other fields
 

@@ -86,14 +86,14 @@ export default function SendedToApv({ setApproved, HandleDelete }) {
                 <Card>
                   <CardBody className="flex flex-col gap-1 justify-Start items-start">
                     <EditTour dcr={i} HandleDelete={HandleDelete} />
-                    <p className="text-xs font-bold">{i.createdByName}</p>
+                    <p className="text-sm font-bold">{i.createdByName}</p>
 
                     <p className="text-xs font-gray-600"> {i.month}</p>
                     <p className="text-xs font-gray-600 bg-blue-100 p-2 font-bold rounded-lg">
                       {moment(i.startDate).format("DD/MM/YYYY")}_to_
                       {moment(i.lastDate).format("DD/MM/YYYY")}
                     </p>
-                    <div className="flex flex-row gap-2">
+                    <div className="flex flex-wrap gap-2">
                       {i?.area.map((i) => {
                         return (
                           <>
@@ -189,6 +189,15 @@ export default function SendedToApv({ setApproved, HandleDelete }) {
                       </Chip>
                     </div>
                   </CardBody>
+                  {moment(i?.lastDate).format("DD/MM/YYYY") ===
+                  moment(new Date()).format("DD/MM/YYYY") ? (
+                    <span class="absolute flex justify-end items-start  h-full w-full">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-25"></span>
+                      <span class="m-2 inline-flex text-black bg-yellow-400 shadow-lg p-2 rounded-lg text-xs font-bold">
+                      🛑 Today is Expiry!
+                      </span>
+                    </span>
+                  ) : null}
                 </Card>
               </>
             );
