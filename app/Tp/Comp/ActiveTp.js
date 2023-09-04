@@ -82,7 +82,7 @@ export default function Activetp({ setActive, HandleDelete }) {
             return (
               <>
                 <Card>
-                  <CardBody className="flex flex-col gap-1 justify-center items-center">
+                  <CardBody className="flex flex-col gap-1 justify-Start items-start">
                     <EditTour dcr={i} HandleDelete={HandleDelete} />
                     <p className="text-xs font-bold">{i.createdByName}</p>
 

@@ -82,7 +82,7 @@ export default function Approvedtp({ setApproved, HandleDelete }) {
             return (
               <>
                 <Card>
-                  <CardBody className="flex flex-col gap-1 justify-center items-center">
+                  <CardBody className="flex flex-col gap-1 justify-Start items-start">
                     <p className="text-xs font-bold">{i.createdByName}</p>
 
                     <p className="text-xs font-gray-600"> {i.month}</p>
