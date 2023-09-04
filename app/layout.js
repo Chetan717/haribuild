@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     setUserData(user);
-  }, [userData]);
+  }, []);
   return (
     <html lang="en">
       <body className={`${inter.className}  `}>
