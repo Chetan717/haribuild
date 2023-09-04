@@ -129,7 +129,7 @@ export default function ReportTemp({
                   Number(k.Qnt) * Number(k.value)
                 }`
             ).join("\n"),
-            `lat: ${i.lat}, log: ${i.log}`,
+            `${i.lat},${i.log}`,
           ]),
         ],
         columnStyles: {
@@ -161,7 +161,7 @@ export default function ReportTemp({
                   Number(key.Qnt) * Number(key.value)
                 }`
             ).join("\n"),
-            `lat: ${i.lat}, log: ${i.log}`,
+            `${i.lat},${i.log}`,
           ]),
         ],
         columnStyles: {
@@ -194,7 +194,7 @@ export default function ReportTemp({
                   Number(key.Qnt) * Number(key.value)
                 }`
             ).join("\n"),
-            `lat: ${i.lat}, log: ${i.log}`,
+            `${i.lat},${i.log}`,
           ]),
         ],
         columnStyles: {

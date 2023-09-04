@@ -396,7 +396,7 @@ export default function EditStock({ item }) {
 
                     <div className="flex flex-col justify-center ">
                       <Input
-                        type="number"
+                        type="text"
                         label="GST NO"
                         name="GSTNo"
                         value={formData.GSTNo}
@@ -412,7 +412,7 @@ export default function EditStock({ item }) {
 
                     <div className="flex flex-col justify-center ">
                       <Input
-                        type="number"
+                        type="text"
                         label="DLNo"
                         name="DLNo"
                         value={formData.DLNo}

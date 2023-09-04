@@ -83,28 +83,22 @@ export default function Approvedtp({ setApproved, HandleDelete }) {
               <>
                 <Card>
                   <CardBody className="flex flex-col gap-1 justify-center items-center">
-                    <p>
-                      {/* Make beautiful websites regardless of your design
-                    experience. Act : true Apv : true DcrId : "1693145736871"
-                    SendToApproved : false area : ['sangmaner'] createdAt :
-                    "2023-08-27T00:00:00.000Z" createdBy : "Vijay123"
-                    createdByName : "Vijay S Wakchaure" lastDate :
-                    "2023-08-31T00:00:00.000Z" month : "August" post : "Sale
-                    manager" startDate : "2023-08-25T00:00:00.000Z" __v : 0 _id */}
-                    </p>
                     <p className="text-xs font-bold">{i.createdByName}</p>
+
                     <p className="text-xs font-gray-600"> {i.month}</p>
-                    {i?.area.map((i) => {
-                      return (
-                        <>
-                          <p className="text-xs font-gray-600">{i}</p>
-                        </>
-                      );
-                    })}
-                    <p className="text-xs font-gray-600">
+                    <p className="text-xs font-gray-600 bg-blue-100 p-2 font-bold rounded-lg">
                       {moment(i.startDate).format("DD/MM/YYYY")}_to_
                       {moment(i.lastDate).format("DD/MM/YYYY")}
                     </p>
+                    <div className="flex flex-row gap-2">
+                      {i?.area.map((i) => {
+                        return (
+                          <>
+                            <p className="text-xs font-gray-600">{i},</p>
+                          </>
+                        );
+                      })}
+                    </div>
                     <div className="flex flex-row gap-3 mt-2 justify-center items-center">
                       {/* <Image
                       className="cursor-pointer"

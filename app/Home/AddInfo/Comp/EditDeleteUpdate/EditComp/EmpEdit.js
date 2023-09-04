@@ -427,16 +427,19 @@ export default function EmpEdit({ item }) {
                         <option value="">Select Post</option>
                         <option value="Sale manager">Sale manager</option>
                         <option value="Buisness Devlopment Executive">
-                          Buisness Devlopment Executive
+                          Business Devlopment Executive
                         </option>
                         <option value="Zonal Sales Manager">
                           Zonal Sales Manager
                         </option>
                         <option value="Area Buisness Manager">
-                          Area Buisness Manager
+                          Area Business Manager
                         </option>
                         <option value="Reginol Sales Manager">
-                          Reginol Sales Manager
+                          Regional Sales Manager
+                        </option>
+                        <option value="Territory sales executive">
+                          Territory sales executive
                         </option>
                       </select>
                       {errors.post && (

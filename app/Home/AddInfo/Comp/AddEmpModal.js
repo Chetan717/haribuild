@@ -356,8 +356,8 @@ export default function AddEmpModal() {
                         <option value="Reginol Sales Manager">
                           Regional Sales Manager
                         </option>
-                        <option value="Teratory Executive">
-                          Teratory Executive
+                        <option value="Territory sales executive">
+                          Territory sales executive
                         </option>
                       </select>
                       {errors.post && (

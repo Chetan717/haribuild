@@ -422,7 +422,7 @@ export default function ChemEdit({ item }) {
                     </div>
                     <div className="flex flex-col justify-center ">
                       <Input
-                        type="number"
+                        type="text"
                         label="GSTNO..."
                         name="GSTNo"
                         value={formData.GSTNo}
@@ -437,7 +437,7 @@ export default function ChemEdit({ item }) {
 
                     <div className="flex flex-col justify-center ">
                       <Input
-                        type="number"
+                        type="text"
                         label="DLNO..."
                         name="DLNo"
                         value={formData.DLNo}
