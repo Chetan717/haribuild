@@ -66,6 +66,8 @@ export default function ChemEdit({ item }) {
     Area: "",
     DLNo: "",
     GSTNo: "",
+    DateOfBirth: "",
+    DateOfAni: "",
   });
 
   React.useEffect(() => {
@@ -79,6 +81,8 @@ export default function ChemEdit({ item }) {
       contactPer,
       DLNo,
       GSTNo,
+      DateOfBirth,
+      DateOfAni,
     } = item || {};
 
     // Update the 'formData' state with the values from 'item'
@@ -91,6 +95,8 @@ export default function ChemEdit({ item }) {
       DLNo,
       contactPer,
       GSTNo,
+      DateOfBirth,
+      DateOfAni,
     });
   }, [item]); // Dependency array with 'item'
 
@@ -104,21 +110,6 @@ export default function ChemEdit({ item }) {
     }
     if (!formData.chemName) {
       newErrors.chemName = "Chemist Name is required";
-    }
-    if (!formData.contactPer) {
-      newErrors.contactPer = "Contact Name is required";
-    }
-    if (!formData.mobile) {
-      newErrors.mobile = "Mobile No. is required";
-    }
-    if (!formData.address) {
-      newErrors.address = "Address is required";
-    }
-    if (!formData.GSTNo) {
-      newErrors.GSTNo = "GST is required";
-    }
-    if (!formData.DLNo) {
-      newErrors.DLNo = "DL.No is required";
     }
 
     if (!formData.Area) {
@@ -164,6 +155,7 @@ export default function ChemEdit({ item }) {
         .finally(() => {
           setIsLoading(false);
         });
+      fetchData();
     } else {
       toast.error("Please fill All Details");
     }
@@ -215,6 +207,7 @@ export default function ChemEdit({ item }) {
       })
       .finally(() => {
         setIsLoading(false);
+        fetchData();
       });
   };
 
@@ -449,7 +442,27 @@ export default function ChemEdit({ item }) {
                         </p>
                       )}
                     </div>
+                    <div className="flex justify-center flex-col">
+                      <label className="text-sm p-1"> Date Of Birth</label>
+                      <Input
+                        type="date"
+                        label=""
+                        name="DateOfBirth"
+                        value={formData.DateOfBirth}
+                        onChange={handleInputChange}
+                      />
+                    </div>
 
+                    <div className="flex justify-center flex-col">
+                      <label className="text-sm p-1">Date Of Anivarsery</label>
+                      <Input
+                        type="date"
+                        label=""
+                        name="DateOfAni"
+                        value={formData.DateOfAni}
+                        onChange={handleInputChange}
+                      />
+                    </div>
                     <div className="flex flex-col justify-center ">
                       <Input
                         type="textarea"

@@ -52,7 +52,7 @@ export default function EditStock({ item }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("full");
   const sizes = ["full"];
-  const { AreasOption ,fetchData} = useGlobalContext();
+  const { AreasOption, fetchData } = useGlobalContext();
   const handleOpen = (size) => {
     setSize(size);
     onOpen();
@@ -68,7 +68,9 @@ export default function EditStock({ item }) {
     DLNo: "",
     GSTNo: "",
     address: "",
-    Area: "",
+    Area:[],
+    DateOfBirth: "",
+    DateOfAni: "",
     Active: true,
     approved: true,
   });
@@ -86,6 +88,8 @@ export default function EditStock({ item }) {
       Area,
       Active,
       approved,
+      DateOfBirth,
+      DateOfAni,
     } = item || {};
 
     // Update the 'formData' state with the values from 'item'
@@ -100,6 +104,8 @@ export default function EditStock({ item }) {
       Area,
       Active,
       approved,
+      DateOfBirth,
+      DateOfAni,
     });
     setApproved(approved);
   }, [item]);
@@ -110,16 +116,10 @@ export default function EditStock({ item }) {
     const newErrors = {};
 
     if (!formData.Code) {
-      newErrors.Code = "ist Code is required";
+      newErrors.Code = "chemist Code is required";
     }
     if (!formData.Name) {
       newErrors.Name = "Chemist Name is required";
-    }
-    if (!formData.mobile) {
-      newErrors.mobile = "Mobile No. is required";
-    }
-    if (!formData.address) {
-      newErrors.address = "Address is required";
     }
 
     // Add similar validation for other fields
@@ -159,7 +159,7 @@ export default function EditStock({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
-          fetchData()
+          fetchData();
         });
     } else {
       toast.error("Please fill All Details");
@@ -186,7 +186,7 @@ export default function EditStock({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
-          fetchData()
+          fetchData();
         });
     } else {
       toast.error("Please fill All Details");
@@ -212,7 +212,7 @@ export default function EditStock({ item }) {
       })
       .finally(() => {
         setIsLoading(false);
-        fetchData()
+        fetchData();
       });
   };
 
@@ -452,7 +452,27 @@ export default function EditStock({ item }) {
                         </p>
                       )}
                     </div>
+                    <div className="flex justify-center flex-col">
+                      <label className="text-sm p-1"> Date Of Birth</label>
+                      <Input
+                        type="date"
+                        label=""
+                        name="DateOfBirth"
+                        value={formData.DateOfBirth}
+                        onChange={handleInputChange}
+                      />
+                    </div>
 
+                    <div className="flex justify-center flex-col">
+                      <label className="text-sm p-1">Date Of Anivarsery</label>
+                      <Input
+                        type="date"
+                        label=""
+                        name="DateOfAni"
+                        value={formData.DateOfAni}
+                        onChange={handleInputChange}
+                      />
+                    </div>
                     <div className="flex flex-col justify-center ">
                       <Input
                         type="textarea"

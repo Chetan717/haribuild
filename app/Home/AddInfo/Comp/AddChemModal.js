@@ -39,6 +39,8 @@ export default function AddChemist() {
     Area: "",
     DLNo: "",
     GSTNo: "",
+    DateOfBirth: "",
+    DateOfAni: "",
     createdBy: "",
     createdAt: new Date().toISOString().slice(0, 10),
     approved: true,
@@ -274,6 +276,27 @@ export default function AddChemist() {
                           {errors.DLNo}
                         </p>
                       )}
+                    </div>
+                    <div className="flex justify-center flex-col">
+                      <label className="text-sm p-1"> Date Of Birth</label>
+                      <Input
+                        type="date"
+                        label=""
+                        name="DateOfBirth"
+                        value={formData.DateOfBirth}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+
+                    <div className="flex justify-center flex-col">
+                      <label className="text-sm p-1">Date Of Anivarsery</label>
+                      <Input
+                        type="date"
+                        label=""
+                        name="DateOfAni"
+                        value={formData.DateOfAni}
+                        onChange={handleInputChange}
+                      />
                     </div>
 
                     <div className="flex flex-col justify-center ">

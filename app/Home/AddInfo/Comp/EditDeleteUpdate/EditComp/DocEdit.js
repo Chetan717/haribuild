@@ -122,22 +122,6 @@ export default function DocEdit({ item }) {
     if (!formData.HosName) {
       newErrors.HosName = "Hospital Name is required";
     }
-    if (!formData.mobile) {
-      newErrors.mobile = "Mobile No. is required";
-    }
-    if (!formData.address) {
-      newErrors.address = "Address is required";
-    }
-    if (!formData.Degree) {
-      newErrors.Degree = "Degree is required";
-    }
-    if (!formData.Speciality) {
-      newErrors.Speciality = "Speciality is required";
-    }
-
-    if (!formData.Area) {
-      newErrors.Area = "Area is required";
-    }
 
     // Add similar validation for other fields
 

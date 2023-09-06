@@ -14,6 +14,7 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 
 import { CustomCheckbox } from "./styleComp/CustomCheckbox";
@@ -24,21 +25,27 @@ export default function AddStockiest() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const sizes = ["5xl"];
-  const { AreasOption } = useGlobalContext();
+  const { AreasOption, fetchData, user } = useGlobalContext();
   const handleOpen = (size) => {
     setSize(size);
     onOpen();
   };
+
+  const [values, setValues] = React.useState([]);
 
   const [formData, setFormData] = React.useState({
     Code: "",
     Name: "",
     mobile: "",
     address: "",
-    Area: "",
+    Area: [],
+    DateOfBirth: "",
+    DateOfAni: "",
     Active: true,
     approved: true,
   });
+  formData.createdBy = "admin";
+  formData.Area = [Array.from(values).join(", ")];
 
   const [errors, setErrors] = React.useState({});
 
@@ -101,9 +108,7 @@ export default function AddStockiest() {
         })
         .finally(() => {
           setIsLoading(false);
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
+          fetchData();
         });
     } else {
       toast.error("Please fill All Details");
@@ -203,32 +208,49 @@ export default function AddStockiest() {
                       )}
                     </div>
                     <div className="flex flex-col justify-center ">
-                      <select
-                        className="outline-none font-semibold text-gray-600 border-1 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
-                        id="Area"
-                        name="Area"
-                        value={formData.Area}
-                        onChange={handleInputChange}
-                        required
-                      >
-                        <option value="">Select Area</option>
-                        {AreasOption?.map((a) => {
-                          return (
-                            <>
-                              <option key={a} value={a}>
-                                {a}
-                              </option>
-                            </>
-                          );
-                        })}
-                      </select>
+                      <div className="flex w-full max-w-xs flex-col gap-2">
+                        <Select
+                          label="Areas"
+                          selectionMode="multiple"
+                          placeholder="Select an Area"
+                          selectedKeys={values}
+                          className="max-w-xs"
+                          onSelectionChange={setValues}
+                        >
+                          {AreasOption?.map((animal) => (
+                            <SelectItem key={animal} value={animal}>
+                              {animal}
+                            </SelectItem>
+                          ))}
+                        </Select>
+                      </div>
                       {errors.Area && (
                         <p className="text-red-500  text-xs p-1">
                           {errors.Area}
                         </p>
                       )}
                     </div>
+                    <div className="flex justify-center flex-col">
+                      <label className="text-sm p-1"> Date Of Birth</label>
+                      <Input
+                        type="date"
+                        label=""
+                        name="DateOfBirth"
+                        value={formData.DateOfBirth}
+                        onChange={handleInputChange}
+                      />
+                    </div>
 
+                    <div className="flex justify-center flex-col">
+                      <label className="text-sm p-1">Date Of Anivarsery</label>
+                      <Input
+                        type="date"
+                        label=""
+                        name="DateOfAni"
+                        value={formData.DateOfAni}
+                        onChange={handleInputChange}
+                      />
+                    </div>
                     <div className="flex flex-col justify-center ">
                       <Input
                         type="textarea"

@@ -51,7 +51,7 @@ export default function TpReport({ dcr }) {
       {
         title: "Avirosa Pharmachem Tour Program Report",
         data: [
-          ["Name", "Month", "H.Q.", "Reporting Manager"],
+          ["Name", "Month", "Area", "Reporting Manager"],
           [createdByName, month, area, ""],
         ],
         columnStyles: {
@@ -69,6 +69,7 @@ export default function TpReport({ dcr }) {
         data: [
           [
             "SR.NO",
+            "Date",
             "Activity",
             "H.Q./E.X./O.S.",
             "Area",
@@ -77,6 +78,7 @@ export default function TpReport({ dcr }) {
           ],
           ...tp.map((i, index) => [
             index + 1,
+            i?.Date,
             i?.Activity,
             i.area.split(",")[1],
             i.area.split(",")[0],
@@ -91,6 +93,7 @@ export default function TpReport({ dcr }) {
           3: { cellWidth: "auto" },
           4: { cellWidth: "auto" },
           5: { cellWidth: "auto" },
+          6: { cellWidth: "auto" },
         },
       },
     ];

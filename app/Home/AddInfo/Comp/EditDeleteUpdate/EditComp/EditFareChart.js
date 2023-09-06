@@ -221,10 +221,10 @@ export default function EditFarChart({ item }) {
                         required
                       >
                         <option value="">Select HeadQuater⛳️</option>
-                        {headquaters.map((index,itm) => {
+                        {headquaters.map((i,itm) => {
                           return (
                             <>
-                              <option key={index} value={itm}>{itm}</option>
+                              <option key={itm} value={i}>{i}</option>
                             </>
                           );
                         })}
