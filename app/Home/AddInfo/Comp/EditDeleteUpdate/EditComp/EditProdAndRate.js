@@ -24,7 +24,7 @@ import { Input } from "@nextui-org/react";
 
 import InputList from "../../EmerncyAdject/InputList";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
-export default function EditProdRate({ item }) {
+export default function EditProdRate({ item,RefetchData,DataFetch }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
@@ -126,16 +126,14 @@ export default function EditProdRate({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
-          fetchData();
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");
     }
   };
 
-  const notify = () => {
-    toast.success(response.message || " Product & Rate Updated !");
-  };
+ 
 
   const handleDelete = (idparam) => {
     const apiUrl = `${Server}/add/proRate/${idparam}`;
@@ -162,13 +160,11 @@ export default function EditProdRate({ item }) {
       .finally(() => {
         setIsLoading(false);
         notifyd();
-        fetchData();
+        RefetchData(DataFetch);
       });
   };
 
-  const notifyd = () => {
-    toast.success("Product & Rate Deleted");
-  };
+ 
   const Types = ["HQ", "EX", "OS"];
   return (
     <>

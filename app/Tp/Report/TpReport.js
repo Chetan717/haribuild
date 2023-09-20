@@ -161,28 +161,6 @@ export default function TpReport({ dcr }) {
           </>
         ))}
       </div>
-
-      {/* <div
-        id="report"
-        className="flex flex-col gap-5 justify-center items-center"
-      >
-        <div className=" flex flex-col justify-center   max-w-[800px]    h-full">
-          <ExecutiveInfo AllDocByDate={AllDocByDate} dcrID={dcrID} />
-          <div className="bg-black text-xs text-white w-full  font-semibold  ">
-            Doctor Details
-          </div>
-          <DoctorDetails AllDocByDate={AllDocByDate} />
-          <div className="bg-black text-xs text-white w-full font-semibold  ">
-            Chemist Details
-          </div>
-          <ChemStockDetails AllChemByDate={AllChemByDate} />
-          <div className="bg-black text-xs text-white w-full  font-semibold  ">
-            Stockiest Details
-          </div>
-          <StockiestDetails AllStockByDate={AllStockByDate} />
-          <BootomDtails cTotal={clen} dtotal={Dlen} sTotal={slen} />
-        </div>
-      </div> */}
     </>
   );
 }

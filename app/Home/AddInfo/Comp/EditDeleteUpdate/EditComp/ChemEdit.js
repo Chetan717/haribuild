@@ -45,7 +45,7 @@ export const CheckIcon = ({ size, height, width, ...props }) => {
   );
 };
 
-export default function ChemEdit({ item }) {
+export default function ChemEdit({ item, RefetchData, DataFetch }) {
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
   const { AreasOption, fetchData } = useGlobalContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -154,8 +154,8 @@ export default function ChemEdit({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
+          RefetchData(DataFetch);
         });
-      fetchData();
     } else {
       toast.error("Please fill All Details");
     }
@@ -181,7 +181,7 @@ export default function ChemEdit({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
-          fetchData();
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");
@@ -207,7 +207,7 @@ export default function ChemEdit({ item }) {
       })
       .finally(() => {
         setIsLoading(false);
-        fetchData();
+        RefetchData(DataFetch);
       });
   };
 

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.3",
     "@nextui-org/react": "^2.1.7",
     "@reduxjs/toolkit": "^1.9.5",
     "autoprefixer": "10.4.14",
@@ -16,6 +17,7 @@
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
     "framer-motion": "^10.16.1",
+    "graphql": "^16.8.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.6.0",
     "moment": "^2.29.4",

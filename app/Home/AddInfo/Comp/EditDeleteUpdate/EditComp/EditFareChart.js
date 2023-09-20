@@ -22,11 +22,18 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
-export default function EditFarChart({ item }) {
+import { useQuery } from "@apollo/client";
+export default function EditFarChart({
+  item,
+  GET_FARE_DATA,
+  RefetchData,
+  DataFetch,
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { refetch } = useQuery(GET_FARE_DATA);
   const [size, setSize] = React.useState("md");
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
-  const { headquaters, AreasOption ,fetchData} = useGlobalContext();
+  const { headquaters, AreasOption, fetchData } = useGlobalContext();
   const sizes = ["5xl"];
 
   const handleOpen = (size) => {
@@ -107,7 +114,6 @@ export default function EditFarChart({ item }) {
   const [response, setResponse] = React.useState({});
 
   const handleSubmit = (idparam) => {
-
     if (validateForm()) {
       const apiUrl = `${Server}/add/stdfare/${idparam}`;
       setIsLoading(true);
@@ -127,14 +133,12 @@ export default function EditFarChart({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
-          fetchData()
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");
     }
   };
-
- ;
 
   const handleDelete = (idparam) => {
     const apiUrl = `${Server}/add/stdfare/${idparam}`;
@@ -160,8 +164,7 @@ export default function EditFarChart({ item }) {
       })
       .finally(() => {
         setIsLoading(false);
-        notifyd();
-        fetchData()
+        RefetchData(DataFetch);
       });
   };
 
@@ -221,10 +224,12 @@ export default function EditFarChart({ item }) {
                         required
                       >
                         <option value="">Select HeadQuater⛳️</option>
-                        {headquaters.map((i,itm) => {
+                        {headquaters.map((i, itm) => {
                           return (
                             <>
-                              <option key={itm} value={i}>{i}</option>
+                              <option key={itm} value={i}>
+                                {i}
+                              </option>
                             </>
                           );
                         })}
@@ -249,7 +254,9 @@ export default function EditFarChart({ item }) {
                         {AreasOption.map((itm) => {
                           return (
                             <>
-                              <option key={itm} value={itm}>{itm}</option>
+                              <option key={itm} value={itm}>
+                                {itm}
+                              </option>
                             </>
                           );
                         })}

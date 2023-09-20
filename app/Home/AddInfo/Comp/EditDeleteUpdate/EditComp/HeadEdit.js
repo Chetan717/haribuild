@@ -22,7 +22,7 @@ import {
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
-export default function EditHeadQ({ item }) {
+export default function EditHeadQ({ item, RefetchData, DataFetch }) {
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
@@ -102,7 +102,7 @@ export default function EditHeadQ({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
-          fetchData();
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");
@@ -133,7 +133,7 @@ export default function EditHeadQ({ item }) {
       .finally(() => {
         setIsLoading(false);
         notifyd();
-        fetchData();
+        RefetchData(DataFetch);
       });
   };
 

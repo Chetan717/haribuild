@@ -69,7 +69,7 @@ const AcmeLogo = () => (
 
 const tabs = [
   { name: "Dashboard", link: "/", icon: <DashboardIcon /> },
-  { name: "Master", link: "/Tabs", icon: <PeoplesIcon /> },
+  { name: "Master", link: "/Master", icon: <PeoplesIcon /> },
   {
     name: "TourProgram",
     link: "/CreateTourProgram",

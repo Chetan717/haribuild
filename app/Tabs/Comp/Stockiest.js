@@ -7,24 +7,104 @@ import {
   TableBody,
   TableRow,
   Button,
+  Pagination,
   TableCell,
 } from "@nextui-org/react";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
+import { Spinner } from "@nextui-org/react";
 
 import EditStockiest from "@/app/Home/AddInfo/Comp/EditDeleteUpdate/EditComp/EditStock";
+import { useQuery, gql } from "@apollo/client";
+export default function ListOfStock({
+  limitData,
+  setLimitData,
+  AreaValue,
+  search,
+  Active,
+}) {
+  const [page, setPage] = React.useState(1);
+  const [last, setLast] = React.useState(20);
+  const [first, setFirst] = React.useState(0);
 
-export default function ListOfStock() {
-  const { allStockiest } = useGlobalContext();
+  const DataPerPage = 10;
 
-  const user = allStockiest.stockData;
+  const LastIndex = DataPerPage * page;
+  const FirstIndex = LastIndex - DataPerPage;
 
-  if (!user || user.length === 0) {
-    return <div>No data available.</div>;
+  const GET_STOCK_DATA = gql`
+    query StockiestData {
+      Stockiest(first:${
+        limitData.first && Active === "Stockiest" ? limitData.first : first
+      }, last:${
+    limitData.last && Active === "Stockiest" ? limitData.last : last
+  }) {
+        lengthData
+    Stockiest {
+    _id
+    Code
+    contactPer
+    Name
+    mobile
+    DLNo
+    GSTNo
+    DateOfBirth
+    DateOfAni
+    address
+    Area
+    Active
+    createdBy
+    approved
+        } 
+      }
+    }`;
+
+  const { loading, error, data, refetch } = useQuery(GET_STOCK_DATA);
+  const PaginatedData = data?.Stockiest?.Stockiest;
+
+  const getFiteredData = (search, AreaValue, PaginatedData) => {
+    if (search && Active === "Stockiest") {
+      return PaginatedData?.filter((i) =>
+        i?.Name?.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    return PaginatedData;
+  };
+
+  const DataFiltered = getFiteredData(search, AreaValue, PaginatedData)?.slice(
+    FirstIndex,
+    LastIndex
+  );
+
+  const TotalData = data?.Stockiest?.lengthData;
+  const TotalPage =
+    search || AreaValue
+      ? Math.ceil(DataFiltered?.length / DataPerPage)
+      : Math.ceil(PaginatedData?.length / DataPerPage);
+
+  const setLastData = (last) => {
+    setLast(last);
+    setFirst(0);
+  };
+
+  const GetAllData = (last) => {
+    setLimitData({
+      first: 0,
+      last: last,
+    });
+  };
+
+  if (loading) {
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   }
 
   const columnsToShow = [
-    "Code",
     "Name",
+    "Code",
     "Area",
     "mobile",
     "address",
@@ -33,17 +113,47 @@ export default function ListOfStock() {
 
   return (
     <>
-      <Table aria-label="User data table">
+      <Table
+        bottomContent={
+          <div className="flex flex-row gap-4">
+            <Pagination
+              isCompact
+              showControls
+              showShadow
+              color="primary"
+              page={page}
+              total={TotalPage}
+              onChange={(page) => setPage(page)}
+            />
+            <Button
+              onClick={() => setLastData(Number(last + 10))}
+              size="sm"
+              className="bg-black text-white"
+            >
+              Load More
+            </Button>
+
+            <Button
+              onClick={() => GetAllData(TotalData)}
+              size="sm"
+              className="bg-black text-white"
+            >
+              {`Get All -${TotalData}`}
+            </Button>
+          </div>
+        }
+        aria-label="User data table"
+      >
         <TableHeader>
           {columnsToShow.map((columnKey) => (
             <TableColumn key={columnKey}>{columnKey}</TableColumn>
           ))}
         </TableHeader>
         <TableBody>
-          {user?.map((item) => (
+          {DataFiltered?.map((item) => (
             <TableRow
               className="p-2 hover:bg-gray-100 cursor-pointer"
-              key={item._id}
+              key={item?._id}
             >
               {columnsToShow.map((columnKey) => (
                 <TableCell
@@ -55,6 +165,8 @@ export default function ListOfStock() {
                       <EditStockiest
                         key={item?._id}
                         item={item ? item : item}
+                        RefetchData={refetch}
+                        DataFetch={GET_STOCK_DATA}
                       />
                     </div>
                   ) : (

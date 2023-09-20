@@ -1,19 +1,73 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
+import ActiveTp from "./ActiveTp";
 import axios from "axios";
-import { Spinner } from "@nextui-org/react";
 import moment from "moment";
 moment().format();
-import Approvedtp from "./Approvedtp";
-import UnApproved from "./UnApproved";
-import Activetp from "./ActiveTp";
-import Expiredtp from "./ExpiredTp";
+import { useQuery, gql } from "@apollo/client";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SendedToApv from "./SendedToApv";
+import Filters from "./Filters/Filters";
 
 export default function MainTp() {
+  const currentDate = new Date();
+  const currentMonth = currentDate.toLocaleString("default", {
+    month: "long",
+  });
+
+  const [month, setMonth] = React.useState(currentMonth);
+  const [status, setStatus] = React.useState("Active");
+
+  const GET_TOUR_DATA = gql`
+    query Query($month: String!) {
+      TourProgram(month: $month) {
+        TourProgram {
+          _id
+          startDate
+          lastDate
+          post
+          area
+          month
+          createdBy
+          createdByName
+          createdAt
+          DcrId
+          Useable
+          SentToApv
+          Act
+          Apv
+        }
+      }
+    }
+  `;
+
+  const { loading, error, data, refetch } = useQuery(GET_TOUR_DATA, {
+    variables: { month: month },
+  });
+
+  const TourProgramData = data?.TourProgram?.TourProgram;
+
+  const GetFilteredData = (status, TourProgramData) => {
+    if (status === "Approved") {
+      const apvData = TourProgramData?.filter((i) => i.Apv === true);
+      return apvData;
+    }
+    if (status === "UnApproved") {
+      const apvData = TourProgramData?.filter((i) => i.Apv === false);
+      return apvData;
+    }
+    if (status === "Expired") {
+      const apvData = TourProgramData?.filter((i) => i.Act === false);
+      return apvData;
+    }
+    if (status === "Active") {
+      const apvData = TourProgramData?.filter((i) => i.Act === true);
+      return apvData;
+    }
+    return TourProgramData;
+  };
+
+  const TourFilteredData = GetFilteredData(status, TourProgramData);
   const variants = ["underlined"];
 
   const [isLoading, setIsLoading] = React.useState(false);
@@ -22,7 +76,7 @@ export default function MainTp() {
 
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
 
-  const setApproved = (id, status, getTp) => {
+  const setApproved = (id, status) => {
     const apiUrl = `${Server}/add/tour/${id}`;
     setIsLoading(true);
     setHasError(false);
@@ -40,11 +94,11 @@ export default function MainTp() {
       })
       .finally(() => {
         setIsLoading(false);
-        getTp();
+        refetch(GET_TOUR_DATA);
       });
   };
 
-  const setActive = (id, status, getTp) => {
+  const setActive = (id, status) => {
     const apiUrl = `${Server}/add/tour/${id}`;
     setIsLoading(true);
     setHasError(false);
@@ -62,7 +116,7 @@ export default function MainTp() {
       })
       .finally(() => {
         setIsLoading(false);
-        getTp();
+        refetch(GET_TOUR_DATA);
       });
   };
 
@@ -85,81 +139,26 @@ export default function MainTp() {
       })
       .finally(() => {
         setIsLoading(false);
+        refetch(GET_TOUR_DATA);
       });
   };
 
   return (
     <>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={1000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-
-      <div className="flex w-full justify-center items-center flex-col">
-        {variants.map((variant) => (
-          <Tabs
-            key={variant}
-            variant={variant}
-            className=""
-            aria-label="Tabs variants"
-          >
-            <Tab key="Reqeusted To Approve" title="Reqeusted To Approve">
-              <Card>
-                <CardBody className="grid grid-cols-3 gap-4">
-                  <SendedToApv
-                    setApproved={setApproved}
-                    HandleDelete={HandleDelete}
-                  />
-                </CardBody>
-              </Card>{" "}
-            </Tab>
-            <Tab key="Approved" title="Approved">
-              <Card>
-                <CardBody className="grid grid-cols-3 gap-4">
-                  <Approvedtp
-                    setApproved={setApproved}
-                    HandleDelete={HandleDelete}
-                  />
-                </CardBody>
-              </Card>{" "}
-            </Tab>
-            <Tab key="UnApproved" title="UnApproved">
-              <Card>
-                <CardBody className="grid grid-cols-3 gap-4">
-                  <UnApproved
-                    setApproved={setApproved}
-                    HandleDelete={HandleDelete}
-                  />
-                </CardBody>
-              </Card>{" "}
-            </Tab>
-            <Tab key="Active" title="Active">
-              <Card>
-                <CardBody className="grid grid-cols-3 gap-4">
-                  <Activetp setActive={setActive} HandleDelete={HandleDelete} />
-                </CardBody>
-              </Card>{" "}
-            </Tab>
-            <Tab key="Expired" title="Expired">
-              <Card>
-                <CardBody className="grid grid-cols-3 gap-4">
-                  <Expiredtp
-                    setActive={setActive}
-                    HandleDelete={HandleDelete}
-                  />
-                </CardBody>
-              </Card>{" "}
-            </Tab>
-          </Tabs>
-        ))}
+      <div className="flex w-full justify-center items-center flex-col gap-4">
+        <Filters
+          month={month}
+          setMonth={setMonth}
+          status={status}
+          setStatus={setStatus}
+        />
+        <ActiveTp
+          setActive={setActive}
+          HandleDelete={HandleDelete}
+          TourProgramData={TourFilteredData}
+          loading={loading}
+          setApproved={setApproved}
+        />
       </div>
     </>
   );

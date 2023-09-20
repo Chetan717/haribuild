@@ -22,81 +22,79 @@ import AddProduct from "../Home/AddInfo/Comp/AddProduct";
 export default function MainTab() {
   return (
     <>
-    
-        <div className="flex  justify-center items-center mb-5  mt-5 flex-col">
-          <Tabs
-            className="flex flex-col justify-center items-center"
-            color="primary"
-            size="sm"
-            aria-label="Options"
-          >
-            <Tab key="Employee Details" title="Employee Details">
-              <Card>
-                <CardBody className="flex flex-col gap-5 justify-center items-center">
-                  <AddEmpModal />
-                  <Emp />
-                </CardBody>
-              </Card>
-            </Tab>
-            <Tab key="Chemist Details" title="Chemist Details">
-              <Card>
-                <CardBody className="flex flex-col gap-5 justify-center items-center">
-                  <AddChemist />
-                  <Chem />
-                </CardBody>
-              </Card>
-            </Tab>
-            <Tab key="Doctor Details" title="Doctor Details">
-              <Card>
-                <CardBody className="flex flex-col gap-5 justify-center items-center">
-                  <AddDoctorModal />
-                  <ListOfDoc />
-                </CardBody>
-              </Card>
-            </Tab>
-            <Tab key="Stockiest Details" title="Stockiest Details">
-              <Card>
-                <CardBody className="flex flex-col gap-5 justify-center items-center">
-                  <AddStockiest />
-                  <ListOfStock />
-                </CardBody>
-              </Card>
-            </Tab>
-            <Tab key="Area Details" title="Area Details">
-              <Card>
-                <CardBody className="flex flex-col gap-5 justify-center items-center">
-                  <AddArea />
-                  <ListOfArea />
-                </CardBody>
-              </Card>
-            </Tab>
-            <Tab key="HeadQuater Details" title="HeadQuater Details">
-              <Card>
-                <CardBody className="flex flex-col gap-5 justify-center items-center">
-                  <AddHeadQ />
-                  <ListOfHeadQ />
-                </CardBody>
-              </Card>
-            </Tab>
-            <Tab key="FareChart Details" title="FareChart Details">
-              <Card>
-                <CardBody className="flex flex-col gap-5 justify-center items-center">
-                  <AddStdFarChart />
-                  <ListOfFare />
-                </CardBody>
-              </Card>
-            </Tab>
-            <Tab key="Product & Rate Details" title="Product & Rate Details">
-              <Card>
-                <CardBody className="flex flex-col gap-5 justify-center items-center">
-                  <AddProduct />
-                  <ListOfProdRate />
-                </CardBody>
-              </Card>
-            </Tab>
-          </Tabs>
-        </div>
-    
+      <div className="flex  justify-center items-center mb-5  mt-5 flex-col">
+        <Tabs
+          className="flex flex-col justify-center items-center"
+          color="primary"
+          size="sm"
+          aria-label="Options"
+        >
+          <Tab key="Employee Details" title="Employee Details">
+            <Card>
+              <CardBody className="flex flex-col gap-5 justify-center items-center">
+                <AddEmpModal />
+                <Emp />
+              </CardBody>
+            </Card>
+          </Tab>
+          <Tab key="Chemist Details" title="Chemist Details">
+            <Card>
+              <CardBody className="flex flex-col gap-5 justify-center items-center">
+                <AddChemist />
+                <Chem />
+              </CardBody>
+            </Card>
+          </Tab>
+          <Tab key="Doctor Details" title="Doctor Details">
+            <Card>
+              <CardBody className="flex flex-col gap-5 justify-center items-center">
+                <AddDoctorModal />
+                <ListOfDoc />
+              </CardBody>
+            </Card>
+          </Tab>
+          <Tab key="Stockiest Details" title="Stockiest Details">
+            <Card>
+              <CardBody className="flex flex-col gap-5 justify-center items-center">
+                <AddStockiest />
+                <ListOfStock />
+              </CardBody>
+            </Card>
+          </Tab>
+          <Tab key="Area Details" title="Area Details">
+            <Card>
+              <CardBody className="flex flex-col gap-5 justify-center items-center">
+                <AddArea />
+                <ListOfArea />
+              </CardBody>
+            </Card>
+          </Tab>
+          <Tab key="HeadQuater Details" title="HeadQuater Details">
+            <Card>
+              <CardBody className="flex flex-col gap-5 justify-center items-center">
+                <AddHeadQ />
+                <ListOfHeadQ />
+              </CardBody>
+            </Card>
+          </Tab>
+          <Tab key="FareChart Details" title="FareChart Details">
+            <Card>
+              <CardBody className="flex flex-col gap-5 justify-center items-center">
+                <AddStdFarChart />
+                <ListOfFare />
+              </CardBody>
+            </Card>
+          </Tab>
+          <Tab key="Product & Rate Details" title="Product & Rate Details">
+            <Card>
+              <CardBody className="flex flex-col gap-5 justify-center items-center">
+                <AddProduct />
+                <ListOfProdRate />
+              </CardBody>
+            </Card>
+          </Tab>
+        </Tabs>
+      </div>
     </>
   );
 }

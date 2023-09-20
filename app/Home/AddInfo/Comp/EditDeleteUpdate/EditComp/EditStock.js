@@ -16,6 +16,9 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/react";
+import { CheckboxGroup } from "@nextui-org/react";
+import { CustomCheckbox } from "../../styleComp/CustomCheckbox";
 import {
   Dropdown,
   DropdownTrigger,
@@ -46,18 +49,18 @@ export const CheckIcon = ({ size, height, width, ...props }) => {
   );
 };
 
-export default function EditStock({ item }) {
+export default function EditStock({ item, RefetchData, DataFetch }) {
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("full");
   const sizes = ["full"];
-  const { AreasOption, fetchData } = useGlobalContext();
+  const { AreasOption, fetchData, user } = useGlobalContext();
   const handleOpen = (size) => {
     setSize(size);
     onOpen();
   };
-
+  const [groupSelected, setGroupSelected] = React.useState([]);
   const [approved, setApproved] = React.useState(true);
 
   const [formData, setFormData] = React.useState({
@@ -68,13 +71,14 @@ export default function EditStock({ item }) {
     DLNo: "",
     GSTNo: "",
     address: "",
-    Area:[],
+    Area: [],
     DateOfBirth: "",
     DateOfAni: "",
     Active: true,
     approved: true,
   });
   formData.approved = approved;
+
   React.useEffect(() => {
     // Destructure the properties from the 'item'
     const {
@@ -108,7 +112,9 @@ export default function EditStock({ item }) {
       DateOfAni,
     });
     setApproved(approved);
+    setGroupSelected(Area);
   }, [item]);
+  formData.Area = groupSelected;
 
   const [errors, setErrors] = React.useState({});
 
@@ -159,7 +165,7 @@ export default function EditStock({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
-          fetchData();
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");
@@ -186,7 +192,7 @@ export default function EditStock({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
-          fetchData();
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");
@@ -212,7 +218,7 @@ export default function EditStock({ item }) {
       })
       .finally(() => {
         setIsLoading(false);
-        fetchData();
+        RefetchData(DataFetch);
       });
   };
 
@@ -234,7 +240,7 @@ export default function EditStock({ item }) {
         {sizes.map((size) => (
           <div
             key={size}
-            className="flex flex-row gap-3 justify-center items-center"
+            className="flex flex-row gap-2 justify-center items-center"
           >
             <Image
               onClick={() => handleOpen(size)}
@@ -426,32 +432,6 @@ export default function EditStock({ item }) {
                       )}
                     </div>
 
-                    <div className="flex flex-col justify-center ">
-                      <select
-                        className="outline-none font-semibold text-gray-600 border-1 bg-transparent text-small w-[300px] h-[50px] rounded-lg bg-gray-200 p-2"
-                        id="Area"
-                        name="Area"
-                        value={formData.Area}
-                        onChange={handleInputChange}
-                        required
-                      >
-                        <option value="">Select Area</option>
-                        {AreasOption?.map((a) => {
-                          return (
-                            <>
-                              <option key={a} value={a}>
-                                {a}
-                              </option>
-                            </>
-                          );
-                        })}
-                      </select>
-                      {errors.Area && (
-                        <p className="text-red-500  text-xs p-1">
-                          {errors.Area}
-                        </p>
-                      )}
-                    </div>
                     <div className="flex justify-center flex-col">
                       <label className="text-sm p-1"> Date Of Birth</label>
                       <Input
@@ -473,6 +453,34 @@ export default function EditStock({ item }) {
                         onChange={handleInputChange}
                       />
                     </div>
+
+                    <div className="flex flex-col gap-4 mt-4">
+                      <div className="flex flex-col  gap-4 w-full">
+                        <CheckboxGroup
+                          className="gap-1 flex text-black font-bold  flex-wrap"
+                          label="Select Areas"
+                          orientation="horizontal"
+                          value={groupSelected}
+                          onChange={setGroupSelected}
+                        >
+                          {AreasOption?.map((i) => {
+                            return (
+                              <>
+                                <CustomCheckbox className="text-sm" value={i}>
+                                  {i}
+                                </CustomCheckbox>
+                              </>
+                            );
+                          })}
+                        </CheckboxGroup>
+                        {errors.selectedAreas && (
+                          <p className="text-red-500 text-xs font-semibold p-1">
+                            {errors.selectedAreas}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
                     <div className="flex flex-col justify-center ">
                       <Input
                         type="textarea"

@@ -22,9 +22,9 @@ import {
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
-export default function EditArea({ item }) {
+export default function EditArea({ item, RefetchData, DataFetch }) {
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
-  const {fetchData} = useGlobalContext()
+  const { fetchData } = useGlobalContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const [typSel, setTypSel] = React.useState("");
@@ -53,7 +53,7 @@ export default function EditArea({ item }) {
     });
     setTypSel(Type);
   }, [item]); // Dependency array with 'item'
-
+  formData.Type = typSel;
   const [errors, setErrors] = React.useState({});
 
   const validateForm = () => {
@@ -81,12 +81,12 @@ export default function EditArea({ item }) {
   const [hasError, setHasError] = React.useState(false);
   const [response, setResponse] = React.useState({});
 
-  const handleSubmit = (idparam) => {
+  const handleSubmit = (idparam, formData) => {
     if (validateForm()) {
       const apiUrl = `${Server}/add/area/${idparam}`;
       setIsLoading(true);
       setHasError(false);
-
+      
       axios
         .put(apiUrl, formData)
         .then((response) => {
@@ -101,14 +101,12 @@ export default function EditArea({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
+          RefetchData(DataFetch);
         });
-        fetchData()
     } else {
       toast.error("Please fill All Details");
     }
   };
-
- 
 
   const handleDelete = (idparam) => {
     const apiUrl = `${Server}/add/area/${idparam}`;
@@ -116,31 +114,21 @@ export default function EditArea({ item }) {
     setHasError(false);
 
     axios
-      .delete(apiUrl, formData)
+      .delete(apiUrl)
       .then((response) => {
         const responseData = response.data;
         setResponse(responseData);
-
-        if (response.status === 200) {
-          // Perform any necessary actions on success
-          notifyd();
-        } else {
-          setHasError(true);
-        }
+        toast.success(`${response?.data?.message}`);
       })
       .catch((error) => {
         setHasError(true);
-        toast.error(error?.message || "Something Went Wrong !");
+
+        toast.error(error?.response?.data?.message);
       })
       .finally(() => {
         setIsLoading(false);
-        notifyd();
-        fetchData()
+        RefetchData(DataFetch);
       });
-  };
-
-  const notifyd = () => {
-    toast.success("Area Deleted");
   };
 
   const Types = ["HQ", "EX", "OS"];
@@ -284,7 +272,7 @@ export default function EditArea({ item }) {
                           key="delete"
                           className="text-danger"
                           color="danger"
-                          onClick={() => handleDelete(item._id)}
+                          onClick={() => handleDelete(item._id, formData)}
                         >
                           Confirm Delete
                         </DropdownItem>
@@ -294,7 +282,7 @@ export default function EditArea({ item }) {
                     <Button
                       color="black"
                       className="bg-black text-white"
-                      onClick={() => handleSubmit(item._id)}
+                      onClick={() => handleSubmit(item._id, formData)}
                     >
                       Save
                     </Button>

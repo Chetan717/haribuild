@@ -46,7 +46,7 @@ import {
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 
-export default function DocEdit({ item }) {
+export default function DocEdit({ item, RefetchData, DataFetch }) {
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -161,7 +161,7 @@ export default function DocEdit({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
-          fetchData();
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");
@@ -188,6 +188,7 @@ export default function DocEdit({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
+          RefetchData(DataFetch);
         });
       fetchData();
     } else {
@@ -213,7 +214,7 @@ export default function DocEdit({ item }) {
       })
       .finally(() => {
         setIsLoading(false);
-        fetchData();
+        RefetchData(DataFetch);
       });
   };
 
@@ -234,10 +235,7 @@ export default function DocEdit({ item }) {
 
       <div className="flex flex-wrap gap-3">
         {sizes.map((size) => (
-          <div
-            key={size}
-            className="flex flex-row gap-3 justify-center items-center"
-          >
+          <div key={size} className="flex flex-row gap-3  ">
             <Image
               onClick={() => handleOpen(size)}
               className="cursor-pointer"

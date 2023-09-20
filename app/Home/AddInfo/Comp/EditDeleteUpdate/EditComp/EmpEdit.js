@@ -24,7 +24,7 @@ import {
   RadioGroup,
   Radio,
 } from "@nextui-org/react";
-export default function EmpEdit({ item }) {
+export default function EmpEdit({ item,RefetchData,DataFetch }) {
   const { allHeadQ, allArea, headquaters, AreasOption, fetchData } =
     useGlobalContext();
 
@@ -208,7 +208,7 @@ export default function EmpEdit({ item }) {
         })
         .finally(() => {
           setIsLoading(false);
-          fetchData();
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");
@@ -238,7 +238,7 @@ export default function EmpEdit({ item }) {
       })
       .finally(() => {
         setIsLoading(false);
-        fetchData();
+        RefetchData(DataFetch);
       });
   };
 

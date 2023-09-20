@@ -141,7 +141,7 @@ export default function AddTour() {
           <div
             key={size}
             onClick={() => handleOpen(size)}
-            className="flex flex-row gap-1 bg-gray-100 p-2 rounded-lg justify-center items-center"
+            className="flex flex-row gap-1 bg-white shadow-lg font-bold text-black  p-3 rounded-lg justify-center items-center"
           >
             <Image
               width={20}
