@@ -56,7 +56,7 @@ export default function ReportTemp({
   const name = dcrID[0]?.createdByName ? dcrID[0]?.createdByName : "-";
   const date = moment(dcrID[0]?.createdAt).format("DD/MM/YYYY");
   const designation = dcrID[0]?.post;
-  const actualTP = dcrID[0]?.area?.join(", ");
+  const month = dcrID?.month
   const workWith = AllDocByDate === undefined ? "-" : AllDocByDate[0]?.workWith;
   const dcrId = dcrID[0]?.DcrId;
 
@@ -80,12 +80,12 @@ export default function ReportTemp({
             "Name",
             "Date",
             "Designation",
-            "Actual_TP",
+            "Month",
             "Work_With",
             "DCR_ID",
             "Departmental Remark Only",
           ],
-          [name, date, designation, actualTP, workWith, dcrId, ""],
+          [name, date, designation, month, workWith, dcrId, ""],
         ],
         columnStyles: {
           0: { cellWidth: "auto" },

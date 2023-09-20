@@ -25,7 +25,7 @@ export default function ExecutiveInfo({ AllDocByDate, dcrID }) {
             </th>
 
             <th class="border border-black text-center text-[10px] font-bold text-gray-800 p-0.5">
-              Actual_TP
+              Month
             </th>
             <th class="border border-black text-center text-[10px] font-bold text-gray-800 p-0.5">
               Work_With
@@ -53,7 +53,7 @@ export default function ExecutiveInfo({ AllDocByDate, dcrID }) {
             </td>
 
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
-              {dcrID[0]?.area?.map((i) => i)}
+              {dcrID[0]?.month}
             </td>
 
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
