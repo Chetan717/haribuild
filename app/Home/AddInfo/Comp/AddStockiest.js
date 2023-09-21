@@ -14,24 +14,24 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import { CheckboxGroup } from "@nextui-org/react";
+import { CustomCheckbox } from "./styleComp/CustomCheckbox";
 import { Select, SelectItem } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 
-import { CustomCheckbox } from "./styleComp/CustomCheckbox";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
-export default function AddStockiest() {
+export default function AddStockiest({ RefetchData, DataFetch }) {
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const sizes = ["5xl"];
-  const { AreasOption, fetchData, user } = useGlobalContext();
+  const { AreasOption, user } = useGlobalContext();
   const handleOpen = (size) => {
     setSize(size);
     onOpen();
   };
-
-  const [values, setValues] = React.useState([]);
+  const [groupSelected, setGroupSelected] = React.useState([]);
 
   const [formData, setFormData] = React.useState({
     Code: "",
@@ -39,13 +39,12 @@ export default function AddStockiest() {
     mobile: "",
     address: "",
     Area: [],
-    DateOfBirth: "",
-    DateOfAni: "",
+    createdBy: "",
     Active: true,
-    approved: true,
+    approved: false,
   });
-  formData.createdBy = "admin";
-  formData.Area = [Array.from(values).join(", ")];
+  formData.Area = groupSelected;
+  formData.createdBy = user.userId || "admin";
 
   const [errors, setErrors] = React.useState({});
 
@@ -58,12 +57,12 @@ export default function AddStockiest() {
     if (!formData.Name) {
       newErrors.Name = "Chemist Name is required";
     }
-    // if (!formData.mobile) {
-    //   newErrors.mobile = "Mobile No. is required";
-    // }
-    // if (!formData.address) {
-    //   newErrors.address = "Address is required";
-    // }
+    if (!formData.mobile) {
+      newErrors.mobile = "Mobile No. is required";
+    }
+    if (!formData.address) {
+      newErrors.address = "Address is required";
+    }
 
     // Add similar validation for other fields
 
@@ -108,7 +107,7 @@ export default function AddStockiest() {
         })
         .finally(() => {
           setIsLoading(false);
-          fetchData();
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");
@@ -141,7 +140,7 @@ export default function AddStockiest() {
             className="text-black font-bold "
             onPress={() => handleOpen(size)}
           >
-            + Add Stockiest
+            + Add Stockiest💊
           </Button>
         ))}
       </div>
@@ -207,50 +206,7 @@ export default function AddStockiest() {
                         </p>
                       )}
                     </div>
-                    <div className="flex flex-col justify-center ">
-                      <div className="flex w-full max-w-xs flex-col gap-2">
-                        <Select
-                          label="Areas"
-                          selectionMode="multiple"
-                          placeholder="Select an Area"
-                          selectedKeys={values}
-                          className="max-w-xs"
-                          onSelectionChange={setValues}
-                        >
-                          {AreasOption?.map((animal) => (
-                            <SelectItem key={animal} value={animal}>
-                              {animal}
-                            </SelectItem>
-                          ))}
-                        </Select>
-                      </div>
-                      {errors.Area && (
-                        <p className="text-red-500  text-xs p-1">
-                          {errors.Area}
-                        </p>
-                      )}
-                    </div>
-                    <div className="flex justify-center flex-col">
-                      <label className="text-sm p-1"> Date Of Birth</label>
-                      <Input
-                        type="date"
-                        label=""
-                        name="DateOfBirth"
-                        value={formData.DateOfBirth}
-                        onChange={handleInputChange}
-                      />
-                    </div>
 
-                    <div className="flex justify-center flex-col">
-                      <label className="text-sm p-1">Date Of Anivarsery</label>
-                      <Input
-                        type="date"
-                        label=""
-                        name="DateOfAni"
-                        value={formData.DateOfAni}
-                        onChange={handleInputChange}
-                      />
-                    </div>
                     <div className="flex flex-col justify-center ">
                       <Input
                         type="textarea"
@@ -265,6 +221,33 @@ export default function AddStockiest() {
                           {errors.address}
                         </p>
                       )}
+                    </div>
+
+                    <div className="flex flex-col gap-4 mt-4">
+                      <div className="flex flex-col  gap-4 w-full">
+                        <CheckboxGroup
+                          className="gap-1 flex text-black font-bold  flex-wrap"
+                          label="Select Areas"
+                          orientation="horizontal"
+                          value={groupSelected}
+                          onChange={setGroupSelected}
+                        >
+                          {AreasOption?.map((i) => {
+                            return (
+                              <>
+                                <CustomCheckbox className="text-sm" value={i}>
+                                  {i}
+                                </CustomCheckbox>
+                              </>
+                            );
+                          })}
+                        </CheckboxGroup>
+                        {errors.selectedAreas && (
+                          <p className="text-red-500 text-xs font-semibold p-1">
+                            {errors.selectedAreas}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </form>

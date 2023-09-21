@@ -14,7 +14,7 @@ import {
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 
-export default function AddHeadQ() {
+export default function AddHeadQ({ RefetchData, DataFetch }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const [typSel, setTypSel] = React.useState("");
@@ -83,6 +83,7 @@ export default function AddHeadQ() {
         .finally(() => {
           setIsLoading(false);
           setFormData({ HeadQuaterName: "" });
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");

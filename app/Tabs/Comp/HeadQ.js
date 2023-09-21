@@ -15,6 +15,7 @@ import { useQuery, gql } from "@apollo/client";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 
 import EditHeadQ from "@/app/Home/AddInfo/Comp/EditDeleteUpdate/EditComp/HeadEdit";
+import AddHeadQ from "@/app/Home/AddInfo/Comp/AddHeadQ";
 export default function ListOfHeadQ() {
   const { allHeadQ } = useGlobalContext();
 
@@ -43,14 +44,13 @@ export default function ListOfHeadQ() {
 
 `;
 
-  const { loading, error, data,refetch } = useQuery(GET_HEADQ_DATA);
+  const { loading, error, data, refetch } = useQuery(GET_HEADQ_DATA);
 
   const PAginatedData = data?.HeadQ?.HeadQ;
   const SlicedData = PAginatedData?.slice(FirstIndex, LastIndex);
 
   const TotalData = data?.HeadQ?.lengthData;
   const TotalPage = Math.ceil(PAginatedData?.length / DataPerPage);
- 
 
   const GetAllData = (TotalData) => {
     setFirst(0);
@@ -60,7 +60,6 @@ export default function ListOfHeadQ() {
   const setLastData = (last) => {
     setFirst(0);
     setLast(last);
- 
   };
 
   if (loading) {
@@ -74,6 +73,7 @@ export default function ListOfHeadQ() {
   const columnsToShow = ["HeadQuaterName", "Actions"];
   return (
     <>
+      <AddHeadQ RefetchData={refetch} DataFetch={GET_HEADQ_DATA} />
       <Table
         bottomContent={
           <div className="flex flex-row gap-4">
@@ -124,8 +124,12 @@ export default function ListOfHeadQ() {
                 >
                   {columnKey === "Actions" ? (
                     <div className="flex flex-row justify-center items-center gap-3">
-                      <EditHeadQ key={item?._id} item={item ? item : item} RefetchData={refetch}
-                        DataFetch={GET_HEADQ_DATA} />
+                      <EditHeadQ
+                        key={item?._id}
+                        item={item ? item : item}
+                        RefetchData={refetch}
+                        DataFetch={GET_HEADQ_DATA}
+                      />
                     </div>
                   ) : (
                     item[columnKey]

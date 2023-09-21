@@ -14,6 +14,7 @@ import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 import { Spinner } from "@nextui-org/react";
 import EditFarChart from "@/app/Home/AddInfo/Comp/EditDeleteUpdate/EditComp/EditFareChart";
 import { useQuery, gql } from "@apollo/client";
+import AddStdFarChart from "@/app/Home/AddInfo/Comp/AddStdFarChart";
 
 export default function ListOfFare() {
   const { allArea } = useGlobalContext();
@@ -84,6 +85,7 @@ export default function ListOfFare() {
 
   return (
     <>
+      <AddStdFarChart RefetchData={refetch} DataFetch={GET_FARE_DATA} />
       <Table
         bottomContent={
           <div className="flex flex-row gap-4">

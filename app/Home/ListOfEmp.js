@@ -13,6 +13,7 @@ import {
 } from "@nextui-org/react";
 import { useQuery, gql } from "@apollo/client";
 import EmpEdit from "./AddInfo/Comp/EditDeleteUpdate/EditComp/EmpEdit";
+import AddEmpModal from "./AddInfo/Comp/AddEmpModal";
 
 export default function ListOfEmp() {
   const GET_EMP_DATA = gql`
@@ -77,6 +78,7 @@ export default function ListOfEmp() {
   }
   return (
     <>
+      <AddEmpModal RefetchData={refetch} DataFetch={GET_EMP_DATA} />
       <Table
         bottomContent={
           <Pagination

@@ -16,7 +16,7 @@ import { Input } from "@nextui-org/react";
 import { CheckboxGroup } from "@nextui-org/react";
 import { CustomCheckbox } from "./styleComp/CustomCheckbox";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
-export default function AddEmpModal() {
+export default function AddEmpModal({ RefetchData, DataFetch }) {
   const { headquaters, AreasOption } = useGlobalContext();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -155,7 +155,9 @@ export default function AddEmpModal() {
             selectedAreas: [],
             pvrRemark: "",
           });
+          RefetchData(DataFetch);
         });
+
     } else {
       toast.error("Please fill All Details");
     }

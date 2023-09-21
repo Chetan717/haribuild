@@ -14,6 +14,7 @@ import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 import { Spinner } from "@nextui-org/react";
 import DocEdit from "@/app/Home/AddInfo/Comp/EditDeleteUpdate/EditComp/DocEdit";
 import { useQuery, gql } from "@apollo/client";
+import AddDoctorModal from "@/app/Home/AddInfo/Comp/AddDoctorModal";
 export default function ListOfDoc({
   limitData,
   setLimitData,
@@ -60,7 +61,7 @@ export default function ListOfDoc({
       }
     }`;
 
-  const { loading, error, data,refetch } = useQuery(GET_DOCTOR_DATA);
+  const { loading, error, data, refetch } = useQuery(GET_DOCTOR_DATA);
   const PaginatedData = data?.Doctor?.Doctor;
 
   const getFiteredData = (search, AreaValue, PaginatedData) => {
@@ -83,8 +84,6 @@ export default function ListOfDoc({
 
     return PaginatedData;
   };
-
- 
 
   const DataFiltered = getFiteredData(search, AreaValue, PaginatedData)?.slice(
     FirstIndex,
@@ -130,6 +129,7 @@ export default function ListOfDoc({
 
   return (
     <>
+      <AddDoctorModal RefetchData={refetch} DataFetch={GET_DOCTOR_DATA} />
       <Table
         bottomContent={
           <div className="flex flex-row gap-4">
@@ -179,8 +179,12 @@ export default function ListOfDoc({
                 >
                   {columnKey === "Actions" ? (
                     <div className="flex flex-row justify-center items-center gap-3">
-                      <DocEdit key={item?._id} item={item ? item : item} RefetchData={refetch}
-                        DataFetch={GET_DOCTOR_DATA} />
+                      <DocEdit
+                        key={item?._id}
+                        item={item ? item : item}
+                        RefetchData={refetch}
+                        DataFetch={GET_DOCTOR_DATA}
+                      />
                     </div>
                   ) : (
                     item[columnKey]

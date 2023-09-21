@@ -15,6 +15,7 @@ import { Spinner } from "@nextui-org/react";
 
 import EditStockiest from "@/app/Home/AddInfo/Comp/EditDeleteUpdate/EditComp/EditStock";
 import { useQuery, gql } from "@apollo/client";
+import AddStockiest from "@/app/Home/AddInfo/Comp/AddStockiest";
 export default function ListOfStock({
   limitData,
   setLimitData,
@@ -113,6 +114,7 @@ export default function ListOfStock({
 
   return (
     <>
+      <AddStockiest RefetchData={refetch} DataFetch={GET_STOCK_DATA} />
       <Table
         bottomContent={
           <div className="flex flex-row gap-4">

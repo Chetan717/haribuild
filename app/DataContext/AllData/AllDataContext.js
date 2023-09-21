@@ -15,10 +15,13 @@ export default function AllDataContext({ children }) {
   const [allStdFare, setAllStdFare] = useState([]);
   const [allProdRate, setAllProdRate] = useState([]);
   const [allStockiest, setAllStockiest] = useState([]);
+  const [user, setUser] = useState({});
 
   const [flag, setFlag] = useState(false);
 
   useEffect(() => {
+    const userinfo = JSON.parse(localStorage?.getItem("user")) || {};
+    setUser(userinfo);
     fetchData();
   }, []);
 
@@ -91,6 +94,7 @@ export default function AllDataContext({ children }) {
       AreasOption,
       allProdRate,
       flag,
+      user,
       fetchData,
     };
   }, [allEmpData]);

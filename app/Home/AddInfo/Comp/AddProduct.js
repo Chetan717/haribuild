@@ -17,7 +17,7 @@ import { CheckboxGroup } from "@nextui-org/react";
 import { CustomCheckbox } from "./styleComp/CustomCheckbox";
 import InputList from "./EmerncyAdject/InputList";
 
-export default function AddProduct() {
+export default function AddProduct({ RefetchData, DataFetch }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const [typSel, setTypSel] = React.useState("");
@@ -117,6 +117,7 @@ export default function AddProduct() {
             PTS: "",
             scheme: [],
           });
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");

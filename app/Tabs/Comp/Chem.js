@@ -14,6 +14,7 @@ import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 import { Spinner } from "@nextui-org/react";
 import ChemEdit from "@/app/Home/AddInfo/Comp/EditDeleteUpdate/EditComp/ChemEdit";
 import { useQuery, gql } from "@apollo/client";
+import AddChemist from "@/app/Home/AddInfo/Comp/AddChemModal";
 export default function ListOfChem({
   limitData,
   setLimitData,
@@ -120,6 +121,7 @@ export default function ListOfChem({
 
   return (
     <>
+      <AddChemist RefetchData={refetch} DataFetch={GET_CHEMIST_DATA} />
       <Table
         bottomContent={
           <div className="flex flex-row gap-4">

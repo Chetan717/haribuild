@@ -233,9 +233,12 @@ export default function DocEdit({ item, RefetchData, DataFetch }) {
         theme="dark"
       />
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-row gap-3">
         {sizes.map((size) => (
-          <div key={size} className="flex flex-row gap-3  ">
+          <div
+            key={size}
+            className="flex flex-row gap-3 justify-center items-center"
+          >
             <Image
               onClick={() => handleOpen(size)}
               className="cursor-pointer"
@@ -317,6 +320,7 @@ export default function DocEdit({ item, RefetchData, DataFetch }) {
           </div>
         ))}
       </div>
+
       <Modal
         size={size}
         isOpen={isOpen}

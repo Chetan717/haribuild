@@ -17,7 +17,7 @@ import {
 import { Input } from "@nextui-org/react";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 
-export default function AddDoctorModal() {
+export default function AddDoctorModal({ RefetchData, DataFetch }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const sizes = ["5xl"];
@@ -140,6 +140,7 @@ export default function AddDoctorModal() {
             P1: "",
             P2: "",
           });
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");

@@ -15,6 +15,7 @@ import { Spinner } from "@nextui-org/react";
 
 import EditArea from "@/app/Home/AddInfo/Comp/EditDeleteUpdate/EditComp/EditArea";
 import { useQuery, gql } from "@apollo/client";
+import AddArea from "@/app/Home/AddInfo/Comp/AddArea";
 
 export default function ListOfArea() {
   const { allArea } = useGlobalContext();
@@ -71,6 +72,7 @@ export default function ListOfArea() {
 
   return (
     <>
+      <AddArea RefetchData={refetch} DataFetch={GET_AREA_DATA} />
       <Table
         bottomContent={
           <div className="flex flex-row gap-4">

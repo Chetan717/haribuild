@@ -14,7 +14,7 @@ import {
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 
-export default function AddArea() {
+export default function AddArea({ RefetchData, DataFetch }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const [typSel, setTypSel] = React.useState("");
@@ -87,6 +87,7 @@ export default function AddArea() {
         .finally(() => {
           setIsLoading(false);
           setFormData({ AreaName: "", Type: "" });
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");

@@ -15,7 +15,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function AddStdFarChart() {
+export default function AddStdFarChart({ RefetchData, DataFetch }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const { AreasOption, headquaters } = useGlobalContext();
@@ -110,6 +110,7 @@ export default function AddStdFarChart() {
             FarePrice: "",
             TravelMode: "",
           });
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");

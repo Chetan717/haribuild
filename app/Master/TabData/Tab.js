@@ -140,12 +140,12 @@ export default function Tab() {
         <div className="flex flex-col justify-center items-center">
           {Active === "Employee" ? (
             <div className="flex flex-col gap-5 justify-center items-center">
-              <AddEmpModal />
+              {/* <AddEmpModal /> */}
               <ListOfEmp />
             </div>
           ) : Active === "Doctor" ? (
             <div className="flex flex-col gap-5 justify-center items-center">
-              <AddDoctorModal />
+              {/* <AddDoctorModal /> */}
               <ListOfDoc
                 limitData={limitData}
                 setLimitData={setLimitData}
@@ -157,27 +157,27 @@ export default function Tab() {
             </div>
           ) : Active === "Area" ? (
             <div className="flex flex-col gap-5 justify-center items-center">
-              <AddArea />
+              {/* <AddArea /> */}
               <ListOfArea />
             </div>
           ) : Active === "Headquaters" ? (
             <div className="flex flex-col gap-5 justify-center items-center">
-              <AddHeadQ />
+              {/* <AddHeadQ /> */}
               <ListOfHeadQ />
             </div>
           ) : Active === "Product&Rate" ? (
             <div className="flex flex-col gap-5 justify-center items-center">
-              <AddProduct />
+              {/* <AddProduct /> */}
               <ListOfProdRate />
             </div>
           ) : Active === "FareChart" ? (
             <div className="flex flex-col gap-5 justify-center items-center">
-              <AddStdFarChart />
+              {/* <AddStdFarChart /> */}
               <ListOfFare />
             </div>
           ) : Active === "Chemist" ? (
             <div className="flex flex-col gap-5 justify-center items-center">
-              <AddChemist />
+              {/* <AddChemist /> */}
               <ListOfChem
                 limitData={limitData}
                 setLimitData={setLimitData}
@@ -189,7 +189,7 @@ export default function Tab() {
             </div>
           ) : Active === "Stockiest" ? (
             <div className="flex flex-col gap-5 justify-center items-center">
-              <AddStockiest />
+              {/* <AddStockiest /> */}
               <ListOfStock
                 limitData={limitData}
                 setLimitData={setLimitData}

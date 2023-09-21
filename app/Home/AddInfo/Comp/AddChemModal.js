@@ -17,7 +17,7 @@ import {
 import { Input } from "@nextui-org/react";
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 
-export default function AddChemist() {
+export default function AddChemist({ RefetchData, DataFetch }) {
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -109,7 +109,7 @@ export default function AddChemist() {
             GSTNo: "",
             createdAt: "",
           });
-          fetchData();
+          RefetchData(DataFetch);
         });
     } else {
       toast.error("Please fill All Details");

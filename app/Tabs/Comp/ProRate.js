@@ -14,6 +14,7 @@ import {
 import { useGlobalContext } from "@/app/DataContext/AllData/AllDataContext";
 import EditProdRate from "@/app/Home/AddInfo/Comp/EditDeleteUpdate/EditComp/EditProdAndRate";
 import { useQuery, gql } from "@apollo/client";
+import AddProduct from "@/app/Home/AddInfo/Comp/AddProduct";
 export default function ListOfProdRate() {
   const { allProdRate } = useGlobalContext();
 
@@ -85,6 +86,7 @@ export default function ListOfProdRate() {
 
   return (
     <>
+      <AddProduct RefetchData={refetch} DataFetch={GET_PRODUCT_DATA} />
       <Table
         bottomContent={
           <div className="flex flex-row gap-4">
