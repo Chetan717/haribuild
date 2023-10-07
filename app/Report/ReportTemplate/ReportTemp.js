@@ -40,7 +40,6 @@ export default function ReportTemp({
     onOpen();
   };
 
-  const [seldate, setSeldate] = useState("");
 
   // //  fijnf dthe dates
   const start_date = new Date(dcrID?.startDate);
