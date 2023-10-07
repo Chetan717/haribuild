@@ -28,6 +28,7 @@ export default function ReportTemp({
   AllChemByDate,
   AllStockByDate,
   dcrID,
+  seldate
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [size, setSize] = React.useState("full");
@@ -54,7 +55,7 @@ export default function ReportTemp({
 
   const userId = JSON.parse(localStorage?.getItem("user")) || "admin";
   const name = dcrID[0]?.createdByName ? dcrID[0]?.createdByName : "-";
-  const date = moment(dcrID[0]?.createdAt).format("DD/MM/YYYY");
+  const date = seldate
   const designation = dcrID[0]?.post;
   const month = dcrID?.month
   const workWith = AllDocByDate === undefined ? "-" : AllDocByDate[0]?.workWith;
@@ -125,8 +126,7 @@ export default function ReportTemp({
             i?.Remark || "No Remark",
             i?.Pob?.map(
               (k) =>
-                `Product: ${k.Product}, Qnt: ${k.Qnt}, value: ${
-                  Number(k.Qnt) * Number(k.value)
+                `Product: ${k.Product}, Qnt: ${k.Qnt}, value: ${Number(k.Qnt) * Number(k.value)
                 }`
             ).join("\n"),
             `${i.lat},${i.log}`,
@@ -157,8 +157,7 @@ export default function ReportTemp({
             i?.chemName,
             i?.Pob?.map(
               (key) =>
-                `Product: ${key.Product}, Qnt: ${key.Qnt}, value: ${
-                  Number(key.Qnt) * Number(key.value)
+                `Product: ${key.Product}, Qnt: ${key.Qnt}, value: ${Number(key.Qnt) * Number(key.value)
                 }`
             ).join("\n"),
             `${i.lat},${i.log}`,
@@ -190,8 +189,7 @@ export default function ReportTemp({
             i?.Collection,
             i?.Pob?.map(
               (key) =>
-                `Product: ${key.Product}, Qnt: ${key.Qnt}, value: ${
-                  Number(key.Qnt) * Number(key.value)
+                `Product: ${key.Product}, Qnt: ${key.Qnt}, value: ${Number(key.Qnt) * Number(key.value)
                 }`
             ).join("\n"),
             `${i.lat},${i.log}`,
@@ -280,7 +278,7 @@ export default function ReportTemp({
         className="flex flex-col gap-5 justify-center items-center"
       >
         <div className=" flex flex-col justify-center   max-w-[800px]    h-full">
-          <ExecutiveInfo AllDocByDate={AllDocByDate} dcrID={dcrID} />
+          <ExecutiveInfo AllDocByDate={AllDocByDate} dcrID={dcrID} seldate={seldate} />
           <div className="bg-black text-xs text-white w-full  font-semibold  ">
             Doctor Details
           </div>

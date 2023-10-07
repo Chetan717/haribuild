@@ -38,7 +38,7 @@ export default function DCrShow({ dcrID, selID }) {
       setAllStockiest({
         stockData: stockResponse.data,
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const handleClose = () => setOpen(false);
@@ -114,6 +114,7 @@ export default function DCrShow({ dcrID, selID }) {
                 AllChemByDate={AllChemByDate}
                 AllStockByDate={AllStockByDate}
                 dcrID={dcrID}
+                seldate={seldate}
               />
             </div>
           </div>

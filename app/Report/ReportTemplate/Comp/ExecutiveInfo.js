@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 moment().format();
 
-export default function ExecutiveInfo({ AllDocByDate, dcrID }) {
+export default function ExecutiveInfo({ AllDocByDate, dcrID, seldate }) {
   const userId = JSON.parse(localStorage?.getItem("user")) || "admin";
 
   // const data = AllDocByDate[0] || AllDocByDate;
@@ -46,7 +46,8 @@ export default function ExecutiveInfo({ AllDocByDate, dcrID }) {
               {dcrID[0]?.createdByName ? dcrID[0]?.createdByName : "-"}
             </td>
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
-              {moment(dcrID[0]?.createdAt).format("DD/MM/YYYY")}
+              {/* {moment(dcrID[0]?.createdAt).format("DD/MM/YYYY")} */}
+              {seldate}
             </td>
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
               {dcrID[0]?.post}
