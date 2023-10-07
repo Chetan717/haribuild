@@ -51,9 +51,9 @@ export default function AddStockiest({ RefetchData, DataFetch }) {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.Code) {
-      newErrors.Code = "ist Code is required";
-    }
+    // if (!formData.Code) {
+    //   newErrors.Code = "ist Code is required";
+    // }
     if (!formData.Name) {
       newErrors.Name = "Chemist Name is required";
     }

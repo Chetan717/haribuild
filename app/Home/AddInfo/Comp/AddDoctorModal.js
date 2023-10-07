@@ -57,9 +57,9 @@ export default function AddDoctorModal({ RefetchData, DataFetch }) {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.DoctorCode) {
-      newErrors.DoctorCode = "Doctor Code is required";
-    }
+    // if (!formData.DoctorCode) {
+    //   newErrors.DoctorCode = "Doctor Code is required";
+    // }
     if (!formData.DoctorName) {
       newErrors.DoctorName = "Doctor Name is required";
     }

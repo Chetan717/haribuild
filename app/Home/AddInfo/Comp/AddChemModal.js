@@ -53,9 +53,9 @@ export default function AddChemist({ RefetchData, DataFetch }) {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.chemCode) {
-      newErrors.chemCode = "Chemist Code is required";
-    }
+    // if (!formData.chemCode) {
+    //   newErrors.chemCode = "Chemist Code is required";
+    // }
     if (!formData.chemName) {
       newErrors.chemName = "Chemist Name is required";
     }
