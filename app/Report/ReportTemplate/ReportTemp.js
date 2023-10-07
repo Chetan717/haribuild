@@ -278,7 +278,7 @@ export default function ReportTemp({
         className="flex flex-col gap-5 justify-center items-center"
       >
         <div className=" flex flex-col justify-center   max-w-[800px]    h-full">
-          <ExecutiveInfo AllDocByDate={AllDocByDate} dcrID={dcrID} seldate={seldate} />
+          <ExecutiveInfo AllDocByDate={AllDocByDate} dcrID={dcrID} seldate={date} />
           <div className="bg-black text-xs text-white w-full  font-semibold  ">
             Doctor Details
           </div>
