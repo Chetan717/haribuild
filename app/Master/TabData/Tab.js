@@ -111,8 +111,8 @@ export default function Tab() {
         </div>
 
         {Active === "Doctor" ||
-        Active === "Chemist" ||
-        Active === "Stockiest" ? (
+          Active === "Chemist" ||
+          Active === "Stockiest" ? (
           <div className="flex bg-white rounded-lg flex-row gap-6 p-2 justify-center items-center">
             <Button
               onClick={ClearAllFilter}

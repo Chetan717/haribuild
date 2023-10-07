@@ -34,11 +34,9 @@ export default function ListOfDoc({
 
   const GET_DOCTOR_DATA = gql`
     query DoctorData {
-      Doctor(first:${
-        limitData.first && Active === "Doctor" ? limitData.first : first
-      }, last:${
-    limitData.last && Active === "Doctor" ? limitData.last : last
-  }) {
+      Doctor(first:${limitData.first && Active === "Doctor" ? limitData.first : first
+    }, last:${limitData.last && Active === "Doctor" ? limitData.last : last
+    }) {
         lengthData
         Doctor {
           _id
@@ -67,7 +65,7 @@ export default function ListOfDoc({
   const getFiteredData = (search, AreaValue, PaginatedData) => {
     if (search && Active === "Doctor") {
       return PaginatedData?.filter((i) =>
-        i?.DoctorName?.toLowerCase().includes(search.toLowerCase())
+        i?.DoctorName?.toLowerCase().includes(search.toLowerCase()) || i?.DoctorCode?.toLowerCase().includes(search.toLowerCase())
       );
     }
     if (AreaValue && Active === "Doctor") {
