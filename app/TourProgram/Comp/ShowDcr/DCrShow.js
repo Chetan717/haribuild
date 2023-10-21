@@ -13,6 +13,7 @@ export default function DCrShow({ dcrID, selID }) {
   const [size, setSize] = React.useState();
   const Server = process.env.NEXT_PUBLIC_SERVER_NAME;
   const [allDoc, setAllDoc] = useState([]);
+
   const [allChem, setAllChem] = useState([]);
 
   const [allStockiest, setAllStockiest] = useState([]);
@@ -21,12 +22,14 @@ export default function DCrShow({ dcrID, selID }) {
     setSize(value);
     setOpen(true);
 
+
     try {
       const [docResponse, chemResponse, stockResponse] = await axios.all([
         axios.get(`${Server}/add/docTourId/${id}`),
         axios.get(`${Server}/add/chemTourId/${id}`),
         axios.get(`${Server}/add/stockTourId/${id}`),
       ]);
+
 
       setAllDoc({
         docData: docResponse.data,

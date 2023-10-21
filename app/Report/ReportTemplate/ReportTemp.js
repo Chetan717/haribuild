@@ -113,7 +113,7 @@ export default function ReportTemp({
             "POB",
             "Location",
           ],
-          ...AllDocByDate.map((i, index) => [
+          ...AllDocByDate?.map((i, index) => [
             index + 1,
             i?.DoctorCode,
             i?.DoctorName,
@@ -150,7 +150,7 @@ export default function ReportTemp({
         title: "",
         data: [
           ["SR.NO", "Code no", "Chemist Name", "POB", "Location"],
-          ...AllChemByDate.map((i, index) => [
+          ...AllChemByDate?.map((i, index) => [
             index + 1,
             i?.chemCode,
             i?.chemName,
@@ -181,7 +181,7 @@ export default function ReportTemp({
             "POB",
             "Location",
           ],
-          ...AllStockByDate.map((i, index) => [
+          ...AllStockByDate?.map((i, index) => [
             index + 1,
             i?.Code,
             i?.Name,

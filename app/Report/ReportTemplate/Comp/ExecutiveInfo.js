@@ -33,6 +33,9 @@ export default function ExecutiveInfo({ AllDocByDate, dcrID, seldate }) {
             <th class="border border-black text-center text-[10px] font-bold text-gray-800 p-0.5">
               DCR_ID
             </th>
+            {/* <th class="border border-black text-center text-[10px] font-bold text-gray-800 p-0.5">
+              Actual Tp
+            </th> */}
 
             <th class="border border-black text-center text-[10px] font-bold text-gray-800 p-0.5">
               Departmental Remark Only
@@ -64,6 +67,9 @@ export default function ExecutiveInfo({ AllDocByDate, dcrID, seldate }) {
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
               {dcrID[0]?.DcrId}
             </td>
+            {/* <td class="border border-black font-title text-gray-800 text-[10px] p-0.5">
+              {dcrID[0]?.area}
+            </td> */}
 
             <td class="border border-black font-title text-gray-800 text-[10px] p-0.5"></td>
           </tr>

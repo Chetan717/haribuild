@@ -82,6 +82,9 @@ export default function DoctorDetails({ AllDocByDate }) {
                 Location
               </th>
               <th class="border border-black text-center text-xs font-bold text-gray-800  ">
+                Punch Time
+              </th>
+              <th class="border border-black text-center text-xs font-bold text-gray-800  ">
                 Action
               </th>
             </tr>
@@ -146,6 +149,9 @@ export default function DoctorDetails({ AllDocByDate }) {
                   })}
                   <td class="border border-black  text-[10px]">
                     {i.lat} , {i.log}
+                  </td>
+                  <td class="border border-black  text-[10px]">
+                    {i?.time}
                   </td>
                   <td class="border border-black p-1 text-[10px] ">
                     {isLoading ? (
